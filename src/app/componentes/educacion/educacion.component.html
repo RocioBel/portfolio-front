@@ -1,0 +1,26 @@
+<div class="card">
+  <div class="title-and-buttons-card">
+    <h2>Educación</h2>
+    <div class="buttons-container">
+      <div class="button-bkg">
+        <i class="fas fa-plus"></i>
+      </div>
+    </div>
+  </div>
+  <div *ngFor="let education of educacionList ">
+    <div style="border: 1px;">
+      <div class="title-and-buttons-card">
+        <p>{{education.titleName}}</p>
+        <div class="buttons-container">
+          <div class="button-bkg">
+            <i class="fas fa-pencil-alt"></i>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p>{{education.institute}}</p>
+        <p>{{education.startDate[0]}} - {{education.endDate[0]}}</p>
+      </div>
+    </div>
+  </div>
+</div>
