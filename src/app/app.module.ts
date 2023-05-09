@@ -14,6 +14,9 @@ import { SkillsComponent } from './componentes/skills/skills.component';
 
 
 import { HttpClientModule } from '@angular/common/http';
+import { IniciarSesionComponent } from './componentes/iniciar-sesion/iniciar-sesion.component';
+import { PortfolioComponent } from './componentes/portfolio/portfolio.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,11 +28,14 @@ import { HttpClientModule } from '@angular/common/http';
     ProyectosComponent,
     IdiomasComponent,
     SkillsComponent,
+    IniciarSesionComponent,
+    PortfolioComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
