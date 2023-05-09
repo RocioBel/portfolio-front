@@ -1,0 +1,28 @@
+<div class="card">
+    <div class="title-and-buttons-card">
+      <h2>Proyectos</h2>
+      <div class="buttons-container">
+        <div class="button-bkg">
+          <i class="fas fa-plus"></i>
+        </div>
+      </div>
+    </div>
+    <div *ngFor="let proyecto of proyectoList ">
+      <div style="border: 1px;">
+        <div class="title-and-buttons-card">
+          <p>{{proyecto.name}}</p>
+          <div class="buttons-container">
+            <div class="button-bkg">
+              <i class="fas fa-pencil-alt"></i>
+            </div>
+          </div>
+        </div>
+        <div>
+          <p>{{proyecto.description}}</p>
+          <p>{{proyecto.github}}</p>
+          <p>{{proyecto.url}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  

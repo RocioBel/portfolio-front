@@ -1,0 +1,26 @@
+<div class="card">
+    <div class="title-and-buttons-card">
+      <h2>Skills</h2>
+      <div class="buttons-container">
+        <div class="button-bkg">
+          <i class="fas fa-plus"></i>
+        </div>
+      </div>
+    </div>
+    <div *ngFor="let skill of skillList ">
+      <div style="border: 1px;">
+        <div class="title-and-buttons-card">
+          <p>{{skill.name}}</p>
+          <div class="buttons-container">
+            <div class="button-bkg">
+              <i class="fas fa-pencil-alt"></i>
+            </div>
+          </div>
+        </div>
+        <div>
+          <p>Nivel: {{skill.level}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
