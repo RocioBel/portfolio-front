@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,10 +12,12 @@ import { IdiomasComponent } from './componentes/idiomas/idiomas.component';
 import { SkillsComponent } from './componentes/skills/skills.component';
 
 
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { IniciarSesionComponent } from './componentes/iniciar-sesion/iniciar-sesion.component';
 import { PortfolioComponent } from './componentes/portfolio/portfolio.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PortfolioService } from './servicios/portfolio.service';
+import { InterceptorService } from './servicios/interceptor.service';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [PortfolioService,
+  {provide: HTTP_INTERCEPTORS, useClass:InterceptorService, multi:true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -10,7 +10,7 @@
     <div *ngFor="let experiencia of experienciaList ">
       <div style="border: 1px;">
         <div class="title-and-buttons-card">
-          <p>{{experiencia.jobTitle}}</p>
+          <p>{{experiencia?.jobTitle}}</p>
           <div class="buttons-container">
             <div class="button-bkg">
               <i class="fas fa-pencil-alt"></i>
@@ -18,9 +18,9 @@
           </div>
         </div>
         <div>
-          <p>{{experiencia.company}}</p>
-          <!-- <p>{{experiencia.startDate[0]}} - {{experiencia.endDate[0]}}</p> -->
-          <p>{{experiencia.description}}</p>
+          <p>{{experiencia?.company}}</p>
+          <!-- <p>{{experiencia?.startDate[0]}} - {{experiencia?.endDate[0]}}</p> -->
+          <p>{{experiencia?.description}}</p>
         </div>
       </div>
     </div>

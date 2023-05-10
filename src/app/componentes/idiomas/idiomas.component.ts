@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { PortfolioService } from 'src/app/servicios/portfolio.service';
-
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-idiomas',
@@ -8,12 +6,10 @@ import { PortfolioService } from 'src/app/servicios/portfolio.service';
   styleUrls: ['./idiomas.component.css']
 })
 export class IdiomasComponent implements OnInit {
-  idiomaList:any;
-  constructor(private datosPortfolio:PortfolioService){}
-
-  ngOnInit(): void {
-     this.datosPortfolio.obtenerDatos().subscribe(data => {
-      this.idiomaList=data.languages;
-    })
+  @Input() idiomaList:any[];
+  constructor(){
+    this.idiomaList = [];
   }
+
+  ngOnInit(): void {}
 }

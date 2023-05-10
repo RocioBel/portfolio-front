@@ -1,7 +1,7 @@
-<app-encabezado></app-encabezado>
-<app-acerca-de></app-acerca-de>
-<app-experiencia></app-experiencia>
-<app-educacion></app-educacion>
-<app-proyectos></app-proyectos>
-<app-idiomas></app-idiomas>
-<app-skills></app-skills>
+<app-encabezado [data]="data"></app-encabezado>
+<app-acerca-de [data]="data?.aboutMe"></app-acerca-de>
+<app-experiencia [experienciaList]="data?.experiences"></app-experiencia>
+<app-educacion [educacionList]="data?.education"></app-educacion>
+<app-proyectos [proyectoList]="data?.projects"></app-proyectos>
+<app-idiomas [idiomaList]="data?.languages"></app-idiomas>
+<app-skills [skillList]="data?.skills"></app-skills>
