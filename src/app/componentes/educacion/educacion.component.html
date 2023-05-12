@@ -3,24 +3,60 @@
     <h2>Educación</h2>
     <div class="buttons-container">
       <div class="button-bkg">
-        <i class="fas fa-plus"></i>
+        <i class="fas fa-plus" (click)="activarModoAdicion()"></i>
       </div>
     </div>
   </div>
-  <div *ngFor="let education of educacionList ">
-    <div style="border: 1px;">
+  <div *ngFor="let educacion of listado; let i = index">
+    <div *ngIf="seleccionIndex !== i" style="border: 1px;">
       <div class="title-and-buttons-card">
-        <p>{{education.titleName}}</p>
+        <p>{{educacion?.titleName}}</p>
         <div class="buttons-container">
           <div class="button-bkg">
-            <i class="fas fa-pencil-alt"></i>
+            <i class="fas fa-pencil-alt" (click)="activarModoEdicion(i)"></i>
+          </div>
+          <div class="button-bkg">
+            <i class="fas fa-trash-alt" (click)="eliminar(educacion.educationId)"></i>
           </div>
         </div>
       </div>
       <div>
-        <p>{{education.institute}}</p>
-        <p>{{education.startDate[0]}} - {{education.endDate[0]}}</p>
+        <p>{{educacion.institute}}</p>
+        <p>{{educacion.startDate}} - {{educacion.endDate}}</p>
       </div>
+    </div>
+
+    <div *ngIf="seleccionIndex === i" style="border: 1px;">
+      <div class="title-and-buttons-card">
+        <input placeholder="Título" [(ngModel)]="educacion.titleName">
+        <div class="buttons-container">
+          <div class="button-bkg">
+            <i class="fas fa-save" (click)="guardar(educacion)"></i>
+          </div>
+        </div>
+      </div>
+      <div>
+        <input placeholder="Instituto" [(ngModel)]="educacion.institute">
+        <input type="date" [(ngModel)]="educacion.startDate">
+        <input type="date" [(ngModel)]="educacion.endDate">
+      </div>
+    </div>
+
+  </div>
+
+  <div *ngIf="modoAdicion" style="border: 1px;">
+    <div class="title-and-buttons-card">
+      <input placeholder="Título" [(ngModel)]="nueva.titleName">
+      <div class="buttons-container">
+        <div class="button-bkg">
+          <i class="fas fa-save" (click)="agregar(nueva)"></i>
+        </div>
+      </div>
+    </div>
+    <div>
+      <input placeholder="Instituto" [(ngModel)]="nueva.institute">
+      <input type="date" [(ngModel)]="nueva.startDate">
+      <input type="date" [(ngModel)]="nueva.endDate">
     </div>
   </div>
 </div>

@@ -29,5 +29,17 @@ export class PortfolioService {
     return this.http.delete(this.url + 'person/1/experience/' + idExperiencia);
   }
 
+  actualizarEducacion(idEducacion:number, datos:any):Observable<any> {
+    return this.http.put(this.url + 'person/1/education/'+idEducacion, datos);
+  }
+
+  agregarEducacion(nuevaEducacion:any):Observable<any> {
+    return this.http.post(this.url + 'person/1/education', nuevaEducacion);
+  }
+
+  eliminarEducacion(idEducacion:number):Observable<any> {
+    return this.http.delete(this.url + 'person/1/education/' + idEducacion);
+  }
+
 
 }
