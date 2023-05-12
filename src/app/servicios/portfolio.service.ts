@@ -6,10 +6,10 @@ import { HttpClient } from '@angular/common/http'
   providedIn: 'root'
 })
 export class PortfolioService {
-
+  url:string="https://portfolio-web-6893.onrender.com/";
   constructor(private http:HttpClient) { }
 
   obtenerDatos():Observable<any> {
-    return this.http.get('https://portfolio-web-6893.onrender.com/person/1');
+    return this.http.get(this.url+'person/1');
   }
 }
