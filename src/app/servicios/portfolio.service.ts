@@ -21,12 +21,20 @@ export class PortfolioService {
     return this.http.put(this.url + 'person/1/experience/'+idExperiencia, datos);
   }
 
+  obtenerExperiencias():Observable<any> {
+    return this.http.get(this.url + 'person/1/experience')
+  }
+
   agregarExperiencia(nuevaExperiencia:any):Observable<any> {
     return this.http.post(this.url + 'person/1/experience', nuevaExperiencia);
   }
 
   eliminarExperiencia(idExperiencia:number):Observable<any> {
     return this.http.delete(this.url + 'person/1/experience/' + idExperiencia);
+  }
+
+  obtenerEducacion():Observable<any> {
+    return this.http.get(this.url + 'person/1/education')
   }
 
   actualizarEducacion(idEducacion:number, datos:any):Observable<any> {
@@ -41,6 +49,10 @@ export class PortfolioService {
     return this.http.delete(this.url + 'person/1/education/' + idEducacion);
   }
 
+  obtenerProyectos():Observable<any> {
+    return this.http.get(this.url + 'person/1/project')
+  }
+
   actualizarProyecto(idProject:number, datos:any):Observable<any> {
     return this.http.put(this.url + 'person/1/project/'+idProject, datos);
   }
@@ -53,6 +65,10 @@ export class PortfolioService {
     return this.http.delete(this.url + 'person/1/project/' + idProject);
   }
 
+  obtenerIdiomas():Observable<any> {
+    return this.http.get(this.url + 'person/1/language')
+  }
+
   actualizarIdioma(idIdioma:number, datos:any):Observable<any> {
     return this.http.put(this.url + 'person/1/language/'+idIdioma, datos);
   }
@@ -63,6 +79,10 @@ export class PortfolioService {
 
   eliminarIdioma(idIdioma:number):Observable<any> {
     return this.http.delete(this.url + 'person/1/language/' + idIdioma);
+  }
+
+  obtenerSkills():Observable<any> {
+    return this.http.get(this.url + 'person/1/skill')
   }
 
   actualizarSkill(idSkill:number, datos:any):Observable<any> {
