@@ -53,4 +53,16 @@ export class PortfolioService {
     return this.http.delete(this.url + 'person/1/project/' + idProject);
   }
 
+  actualizarIdioma(idIdioma:number, datos:any):Observable<any> {
+    return this.http.put(this.url + 'person/1/language/'+idIdioma, datos);
+  }
+
+  agregarIdioma(nuevoIdioma:any):Observable<any> {
+    return this.http.post(this.url + 'person/1/language', nuevoIdioma);
+  }
+
+  eliminarIdioma(idIdioma:number):Observable<any> {
+    return this.http.delete(this.url + 'person/1/language/' + idIdioma);
+  }
+
 }
