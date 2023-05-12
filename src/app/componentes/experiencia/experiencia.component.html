@@ -22,11 +22,12 @@
       </div>
       <div>
         <p>{{experiencia?.company}}</p>
-        <!-- <p>{{experiencia?.startDate[0]}} - {{experiencia?.endDate[0]}}</p>  -->
         <p>{{experiencia?.description}}</p>
         <p>{{ obtenerLabelTipoTrabajo(experiencia?.typeId) }}</p>
+        <p>{{experiencia?.startDate}} - {{experiencia?.endDate}}</p>
       </div>
     </div>
+
     <div *ngIf="seleccionIndex === i" style="border: 1px;">
       <div class="title-and-buttons-card">
         <input placeholder="Puesto" [(ngModel)]="experiencia.jobTitle">
@@ -38,13 +39,15 @@
       </div>
       <div>
         <input placeholder="Empresa" [(ngModel)]="experiencia.company">
-        <!-- <p>{{experiencia?.startDate[0]}} - {{experiencia?.endDate[0]}}</p> -->
-        <input placeholder="Descripción"  [(ngModel)]="experiencia.description">
+        <input placeholder="Descripción" [(ngModel)]="experiencia.description">
         <select [(ngModel)]="experiencia.typeId">
           <option *ngFor="let tipo of tiposTrabajo" [value]="tipo.value">{{ tipo.label }}</option>
         </select>
+        <input type="date" [(ngModel)]="experiencia.startDate">
+        <input type="date" [(ngModel)]="experiencia.endDate">
       </div>
     </div>
+
   </div>
 
   <div *ngIf="modoAdicion" style="border: 1px;">
@@ -58,11 +61,12 @@
     </div>
     <div>
       <input placeholder="Empresa" [(ngModel)]="nueva.company">
-      <!-- <p>{{experiencia?.startDate[0]}} - {{experiencia?.endDate[0]}}</p> -->
-      <input placeholder="Descripción"  [(ngModel)]="nueva.description">
+      <input placeholder="Descripción" [(ngModel)]="nueva.description">
       <select [(ngModel)]="nueva.typeId">
         <option *ngFor="let tipo of tiposTrabajo" [value]="tipo.value">{{ tipo.label }}</option>
       </select>
+      <input type="date" [(ngModel)]="nueva.startDate">
+      <input type="date" [(ngModel)]="nueva.endDate">
     </div>
   </div>
 </div>
