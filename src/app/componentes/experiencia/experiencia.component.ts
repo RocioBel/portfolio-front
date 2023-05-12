@@ -8,8 +8,8 @@ import { PortfolioService } from 'src/app/servicios/portfolio.service';
   styleUrls: ['./experiencia.component.css']
 })
 export class ExperienciasComponent implements OnInit {
-  @Input() experienciaList:any;
-  @Input() nuevaExperiencia:any;
+  @Input() listado:any;
+  @Input() nueva:any;
   seleccionIndex: number = -1
   modoAdicion = false;
   tiposTrabajo = [
@@ -18,7 +18,7 @@ export class ExperienciasComponent implements OnInit {
     { label: 'Autónomo', value: '3' }
   ]
   constructor(private portfolioServicio:PortfolioService){
-    this.experienciaList = [];
+    this.listado = [];
   }
 
   ngOnInit(): void {  }
@@ -29,10 +29,10 @@ export class ExperienciasComponent implements OnInit {
 
   activarModoAdicion() {
     this.modoAdicion = true;
-    this.nuevaExperiencia = {}; 
+    this.nueva = {}; 
   }
 
-  guardarCambios(cambios:any) {
+  guardar(cambios:any) {
     console.log("cambios: "+JSON.stringify(cambios));
     this.portfolioServicio.actualizarExperiencia(cambios.experienceId, cambios).subscribe(
       response => {
@@ -45,11 +45,11 @@ export class ExperienciasComponent implements OnInit {
     this.seleccionIndex = -1;
   }
 
-  agregarExperiencia(experiencia:any) {
+  agregar(experiencia:any) {
     this.portfolioServicio.agregarExperiencia(experiencia).subscribe(
       response => {
         console.log('Datos agregados:', response);
-        this.experienciaList.push(experiencia);
+        this.listado.push(experiencia);
       },
       error => {
         console.log("Error al agregar datos:", error);
@@ -65,14 +65,14 @@ export class ExperienciasComponent implements OnInit {
     return tipoTrabajo ? tipoTrabajo.label : '';
   }
 
-  eliminarExperiencia(id:number) {
+  eliminar(id:number) {
     console.log("componente:" + id);
     this.portfolioServicio.eliminarExperiencia(id).subscribe(
       () => {
-        this.experienciaList = this.experienciaList.filter((exp: any) => exp.experienceId !== id);
+        this.listado = this.listado.filter((exp: any) => exp.experienceId !== id);
       },
       error => {
-        console.log("Error al eliminar experiencia:", error);
+        console.log("Error al eliminar:", error);
       })
   }
 }
