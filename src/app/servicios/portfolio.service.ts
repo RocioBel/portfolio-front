@@ -25,5 +25,9 @@ export class PortfolioService {
     return this.http.post(this.url + 'person/1/experience', nuevaExperiencia);
   }
 
+  eliminarExperiencia(idExperiencia:number):Observable<any> {
+    return this.http.delete(this.url + 'person/1/experience/' + idExperiencia);
+  }
+
 
 }

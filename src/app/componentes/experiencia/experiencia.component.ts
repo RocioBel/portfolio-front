@@ -46,21 +46,33 @@ export class ExperienciasComponent implements OnInit {
   }
 
   agregarExperiencia(experiencia:any) {
-    console.log("cambios: "+JSON.stringify(experiencia));
     this.portfolioServicio.agregarExperiencia(experiencia).subscribe(
       response => {
-        console.log('Datos agregador:', response);
+        console.log('Datos agregados:', response);
         this.experienciaList.push(experiencia);
       },
       error => {
         console.log("Error al agregar datos:", error);
       }
     );
+
+    this.modoAdicion = false;
     
   }
 
   obtenerLabelTipoTrabajo(id: string): string {
     const tipoTrabajo = this.tiposTrabajo.find(tipo => tipo.value == id);
     return tipoTrabajo ? tipoTrabajo.label : '';
+  }
+
+  eliminarExperiencia(id:number) {
+    console.log("componente:" + id);
+    this.portfolioServicio.eliminarExperiencia(id).subscribe(
+      () => {
+        this.experienciaList = this.experienciaList.filter((exp: any) => exp.experienceId !== id);
+      },
+      error => {
+        console.log("Error al eliminar experiencia:", error);
+      })
   }
 }
