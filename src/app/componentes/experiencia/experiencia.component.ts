@@ -10,7 +10,7 @@ import { PortfolioService } from 'src/app/servicios/portfolio.service';
 export class ExperienciasComponent implements OnInit {
   @Input() experienciaList:any;
   @Input() nuevaExperiencia:any;
-  experienciaSeleccionadaIndex: number = -1
+  seleccionIndex: number = -1
   modoAdicion = false;
   tiposTrabajo = [
     { label: 'Jornada completa', value: '1' },
@@ -24,7 +24,7 @@ export class ExperienciasComponent implements OnInit {
   ngOnInit(): void {  }
 
   activarModoEdicion(index:any) {
-    this.experienciaSeleccionadaIndex = index;
+    this.seleccionIndex = index;
   }
 
   activarModoAdicion() {
@@ -42,7 +42,7 @@ export class ExperienciasComponent implements OnInit {
         console.log("Error al actualizar datos:", error);
       }
     );
-    this.experienciaSeleccionadaIndex = -1;
+    this.seleccionIndex = -1;
   }
 
   agregarExperiencia(experiencia:any) {

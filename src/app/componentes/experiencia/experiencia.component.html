@@ -8,7 +8,7 @@
     </div>
   </div>
   <div *ngFor="let experiencia of experienciaList; let i = index ">
-    <div *ngIf="experienciaSeleccionadaIndex !== i" style="border: 1px;">
+    <div *ngIf="seleccionIndex !== i" style="border: 1px;">
       <div class="title-and-buttons-card">
         <p>{{experiencia?.jobTitle}}</p>
         <div class="buttons-container">
@@ -27,7 +27,7 @@
         <p>{{ obtenerLabelTipoTrabajo(experiencia?.typeId) }}</p>
       </div>
     </div>
-    <div *ngIf="experienciaSeleccionadaIndex === i" style="border: 1px;">
+    <div *ngIf="seleccionIndex === i" style="border: 1px;">
       <div class="title-and-buttons-card">
         <input placeholder="Puesto" [(ngModel)]="experiencia.jobTitle">
         <div class="buttons-container">
