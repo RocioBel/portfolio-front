@@ -41,5 +41,16 @@ export class PortfolioService {
     return this.http.delete(this.url + 'person/1/education/' + idEducacion);
   }
 
+  actualizarProyecto(idProject:number, datos:any):Observable<any> {
+    return this.http.put(this.url + 'person/1/project/'+idProject, datos);
+  }
+
+  agregarProyecto(nuevoProject:any):Observable<any> {
+    return this.http.post(this.url + 'person/1/project', nuevoProject);
+  }
+
+  eliminarProyecto(idProject:number):Observable<any> {
+    return this.http.delete(this.url + 'person/1/project/' + idProject);
+  }
 
 }

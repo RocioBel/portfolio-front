@@ -1,28 +1,63 @@
 <div class="card">
-    <div class="title-and-buttons-card">
-      <h2>Proyectos</h2>
-      <div class="buttons-container">
-        <div class="button-bkg">
-          <i class="fas fa-plus"></i>
-        </div>
-      </div>
-    </div>
-    <div *ngFor="let proyecto of proyectoList ">
-      <div style="border: 1px;">
-        <div class="title-and-buttons-card">
-          <p>{{proyecto.name}}</p>
-          <div class="buttons-container">
-            <div class="button-bkg">
-              <i class="fas fa-pencil-alt"></i>
-            </div>
-          </div>
-        </div>
-        <div>
-          <p>{{proyecto.description}}</p>
-          <p>{{proyecto.github}}</p>
-          <p>{{proyecto.url}}</p>
-        </div>
+  <div class="title-and-buttons-card">
+    <h2>Proyectos</h2>
+    <div class="buttons-container">
+      <div class="button-bkg">
+        <i class="fas fa-plus" (click)="activarModoAdicion()"></i>
       </div>
     </div>
   </div>
-  
+  <div *ngFor="let proyecto of listado; let i = index ">
+    <div *ngIf="seleccionIndex !== i" style="border: 1px;">
+      <div class="title-and-buttons-card">
+        <p>{{proyecto?.name}}</p>
+        <div class="buttons-container">
+          <div class="button-bkg">
+            <i class="fas fa-pencil-alt" (click)="activarModoEdicion(i)"></i>
+          </div>
+          <div class="button-bkg">
+            <i class="fas fa-trash-alt" (click)="eliminar(proyecto.projectId)"></i>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p>{{proyecto?.description}}</p>
+        <p>{{proyecto?.github}}</p>
+        <p>{{proyecto?.url}}</p>
+      </div>
+    </div>
+
+    <div *ngIf="seleccionIndex === i" style="border: 1px;">
+      <div class="title-and-buttons-card">
+        <input placeholder="Nombre del proyecto" [(ngModel)]="proyecto.name">
+        <div class="buttons-container">
+          <div class="button-bkg">
+            <i class="fas fa-save" (click)="guardar(proyecto)"></i>
+          </div>
+        </div>
+      </div>
+      <div>
+        <input placeholder="Descripción" [(ngModel)]="proyecto.description">
+        <input placeholder="Github" [(ngModel)]="proyecto.github">
+        <input placeholder="Url" [(ngModel)]="proyecto.url">
+      </div>
+    </div>
+
+  </div>
+
+  <div *ngIf="modoAdicion" style="border: 1px;">
+    <div class="title-and-buttons-card">
+      <input placeholder="Nombre del proyecto" [(ngModel)]="nuevo.name">
+      <div class="buttons-container">
+        <div class="button-bkg">
+          <i class="fas fa-save" (click)="agregar(nuevo)"></i>
+        </div>
+      </div>
+    </div>
+    <div>
+      <input placeholder="Descripción" [(ngModel)]="nuevo.description">
+      <input placeholder="Github" [(ngModel)]="nuevo.github">
+      <input placeholder="Url" [(ngModel)]="nuevo.url">
+    </div>
+  </div>
+</div>

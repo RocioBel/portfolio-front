@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { PortfolioService } from 'src/app/servicios/portfolio.service';
 
 
 @Component({
@@ -7,10 +8,63 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./proyectos.component.css']
 })
 export class ProyectosComponent implements OnInit {
-  @Input() proyectoList:any[];
-  constructor(){
-    this.proyectoList = [];
+  @Input() listado:any;
+  @Input() nuevo:any;
+  seleccionIndex: number = -1
+  modoAdicion = false;
+
+  constructor(private portfolioServicio:PortfolioService){
+    this.listado = [];
   }
 
   ngOnInit(): void {  }
+
+  activarModoEdicion(index:any) {
+    this.seleccionIndex = index;
+  }
+
+  activarModoAdicion() {
+    this.modoAdicion = true;
+    this.nuevo = {}; 
+  }
+
+  guardar(cambios:any) {
+    console.log("cambios: "+JSON.stringify(cambios));
+    this.portfolioServicio.actualizarProyecto(cambios.projectId, cambios).subscribe(
+      response => {
+        console.log('Datos actualizados:', response);
+      },
+      error => {
+        console.log("Error al actualizar datos:", error);
+      }
+    );
+    this.seleccionIndex = -1;
+  }
+
+  agregar(proyecto:any) {
+    this.portfolioServicio.agregarProyecto(proyecto).subscribe(
+      response => {
+        console.log('Datos agregados:', response);
+        this.listado.push(proyecto);
+      },
+      error => {
+        console.log("Error al agregar datos:", error);
+      }
+    );
+
+    this.modoAdicion = false;
+    
+  }
+
+
+  eliminar(id:number) {
+    console.log("componente:" + id);
+    this.portfolioServicio.eliminarProyecto(id).subscribe(
+      () => {
+        this.listado = this.listado.filter((exp: any) => exp.projectId !== id);
+      },
+      error => {
+        console.log("Error al eliminar datos:", error);
+      })
+  }
 }
