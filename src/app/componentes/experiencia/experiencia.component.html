@@ -51,7 +51,7 @@
           <option *ngFor="let tipo of tiposTrabajo" [value]="tipo.value">{{ tipo.label }}</option>
         </select>
         <input type="date" [(ngModel)]="experiencia.startDate">
-        <input type="checkbox" [(ngModel)]="experiencia.isActual" (change)="reiniciarFecha(nueva)"> <label>Actualmente tengo este cargo</label>
+        <input type="checkbox" [(ngModel)]="experiencia.isActual" (change)="reiniciarFecha(experiencia)"> <label>Actualmente tengo este cargo</label>
         <input type="date" [(ngModel)]="experiencia.endDate" [disabled]="experiencia.isActual">
       </div>
     </div>
