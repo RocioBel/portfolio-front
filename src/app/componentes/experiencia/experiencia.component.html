@@ -1,28 +1,65 @@
 <div class="card">
-    <div class="title-and-buttons-card">
-      <h2>Experiencia</h2>
-      <div class="buttons-container">
-        <div class="button-bkg">
-          <i class="fas fa-plus"></i>
-        </div>
-      </div>
-    </div>
-    <div *ngFor="let experiencia of experienciaList ">
-      <div style="border: 1px;">
-        <div class="title-and-buttons-card">
-          <p>{{experiencia?.jobTitle}}</p>
-          <div class="buttons-container">
-            <div class="button-bkg">
-              <i class="fas fa-pencil-alt"></i>
-            </div>
-          </div>
-        </div>
-        <div>
-          <p>{{experiencia?.company}}</p>
-          <!-- <p>{{experiencia?.startDate[0]}} - {{experiencia?.endDate[0]}}</p> -->
-          <p>{{experiencia?.description}}</p>
-        </div>
+  <div class="title-and-buttons-card">
+    <h2>Experiencia</h2>
+    <div class="buttons-container">
+      <div class="button-bkg">
+        <i class="fas fa-plus" (click)="activarModoAdicion()"></i>
       </div>
     </div>
   </div>
-  
+  <div *ngFor="let experiencia of experienciaList; let i = index ">
+    <div *ngIf="experienciaSeleccionadaIndex !== i" style="border: 1px;">
+      <div class="title-and-buttons-card">
+        <p>{{experiencia?.jobTitle}}</p>
+        <div class="buttons-container">
+          <div class="button-bkg">
+            <i class="fas fa-pencil-alt" (click)="activarModoEdicion(i)"></i>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p>{{experiencia?.company}}</p>
+        <!-- <p>{{experiencia?.startDate[0]}} - {{experiencia?.endDate[0]}}</p>  -->
+        <p>{{experiencia?.description}}</p>
+        <p>{{ obtenerLabelTipoTrabajo(experiencia?.typeId) }}</p>
+      </div>
+    </div>
+    <div *ngIf="experienciaSeleccionadaIndex === i" style="border: 1px;">
+      <div class="title-and-buttons-card">
+        <input placeholder="Puesto" [(ngModel)]="experiencia.jobTitle">
+        <div class="buttons-container">
+          <div class="button-bkg">
+            <i class="fas fa-save" (click)="guardarCambios(experiencia)"></i>
+          </div>
+        </div>
+      </div>
+      <div>
+        <input placeholder="Empresa" [(ngModel)]="experiencia.company">
+        <!-- <p>{{experiencia?.startDate[0]}} - {{experiencia?.endDate[0]}}</p> -->
+        <input placeholder="Descripción"  [(ngModel)]="experiencia.description">
+        <select [(ngModel)]="experiencia.typeId">
+          <option *ngFor="let tipo of tiposTrabajo" [value]="tipo.value">{{ tipo.label }}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="modoAdicion" style="border: 1px;">
+    <div class="title-and-buttons-card">
+      <input placeholder="Puesto" [(ngModel)]="nuevaExperiencia.jobTitle">
+      <div class="buttons-container">
+        <div class="button-bkg">
+          <i class="fas fa-save" (click)="agregarExperiencia(nuevaExperiencia)"></i>
+        </div>
+      </div>
+    </div>
+    <div>
+      <input placeholder="Empresa" [(ngModel)]="nuevaExperiencia.company">
+      <!-- <p>{{experiencia?.startDate[0]}} - {{experiencia?.endDate[0]}}</p> -->
+      <input placeholder="Descripción"  [(ngModel)]="nuevaExperiencia.description">
+      <select [(ngModel)]="nuevaExperiencia.typeId">
+        <option *ngFor="let tipo of tiposTrabajo" [value]="tipo.value">{{ tipo.label }}</option>
+      </select>
+    </div>
+  </div>
+</div>
