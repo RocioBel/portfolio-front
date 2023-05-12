@@ -22,7 +22,14 @@
       </div>
       <div>
         <p>{{educacion.institute}}</p>
-        <p>{{educacion.startDate}} - {{educacion.endDate}}</p>
+        <div style="display:flex">{{educacion?.startDate}} -
+          <div *ngIf="!educacion.isActual">
+            <p>{{ educacion.endDate }}</p>
+          </div>
+          <div *ngIf="educacion.isActual">
+            <p>Actualidad</p>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -37,8 +44,8 @@
       </div>
       <div>
         <input placeholder="Instituto" [(ngModel)]="educacion.institute">
-        <input type="date" [(ngModel)]="educacion.startDate">
-        <input type="date" [(ngModel)]="educacion.endDate">
+        <input type="checkbox" [(ngModel)]="educacion.isActual" (change)="reiniciarFecha(educacion)"> <label>Actualmente estoy cursando</label>
+        <input type="date" [(ngModel)]="educacion.endDate" [disabled]="educacion.isActual">
       </div>
     </div>
 
@@ -56,7 +63,8 @@
     <div>
       <input placeholder="Instituto" [(ngModel)]="nueva.institute">
       <input type="date" [(ngModel)]="nueva.startDate">
-      <input type="date" [(ngModel)]="nueva.endDate">
+      <input type="checkbox" [(ngModel)]="nueva.isActual" (change)="reiniciarFecha(nueva)"> <label>Actualmente estoy cursando</label>
+      <input type="date" [(ngModel)]="nueva.endDate" [disabled]="nueva.isActual">
     </div>
   </div>
 </div>

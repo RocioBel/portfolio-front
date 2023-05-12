@@ -39,6 +39,21 @@ export class EducacionComponent implements OnInit{
       }
     );
     this.seleccionIndex = -1;
+
+    setTimeout(() => {
+      this.actualizarListado();
+    }, 5000);
+  }
+
+  actualizarListado() {
+    this.portfolioServicio.obtenerEducacion().subscribe(
+      (educacion: any[]) => {
+        this.listado = educacion;
+      },
+      (error: any) => {
+        console.error('Error al obtener el listado:', error);
+      }
+    );
   }
 
   agregar(educacion:any) {
@@ -53,7 +68,10 @@ export class EducacionComponent implements OnInit{
     );
 
     this.modoAdicion = false;
-    
+
+    setTimeout(() => {
+      this.actualizarListado();
+    }, 3000);
   }
 
 
@@ -66,6 +84,11 @@ export class EducacionComponent implements OnInit{
       error => {
         console.log("Error al eliminar datos:", error);
       })
+  }
+
+  reiniciarFecha(educacion: any): string {
+    educacion.endDate = null;
+    return educacion;
   }
   
 }
