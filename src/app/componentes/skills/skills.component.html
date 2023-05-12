@@ -3,23 +3,54 @@
       <h2>Skills</h2>
       <div class="buttons-container">
         <div class="button-bkg">
-          <i class="fas fa-plus"></i>
+          <i class="fas fa-plus" (click)="activarModoAdicion()"></i>
         </div>
       </div>
     </div>
-    <div *ngFor="let skill of skillList ">
-      <div style="border: 1px;">
+    <div *ngFor="let skill of listado; let i = index ">
+      <div *ngIf="seleccionIndex !== i" style="border: 1px;">
         <div class="title-and-buttons-card">
-          <p>{{skill.name}}</p>
+          <p>{{skill?.name}}</p>
           <div class="buttons-container">
             <div class="button-bkg">
-              <i class="fas fa-pencil-alt"></i>
+              <i class="fas fa-pencil-alt" (click)="activarModoEdicion(i)"></i>
+            </div>
+            <div class="button-bkg">
+              <i class="fas fa-trash-alt" (click)="eliminar(skill.skillId)"></i>
             </div>
           </div>
         </div>
         <div>
-          <p>Nivel: {{skill.level}}</p>
+          <p>Nivel: {{skill?.level}}</p>
         </div>
+      </div>
+
+      <div *ngIf="seleccionIndex === i" style="border: 1px;">
+        <div class="title-and-buttons-card">
+          <input placeholder="Skill" [(ngModel)]="skill.name">
+          <div class="buttons-container">
+            <div class="button-bkg">
+              <i class="fas fa-save" (click)="guardar(skill)"></i>
+            </div>
+          </div>
+        </div>
+        <div>
+          <input placeholder="Nivel" [(ngModel)]="skill.level">
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="modoAdicion" style="border: 1px;">
+      <div class="title-and-buttons-card">
+        <input placeholder="Skill" [(ngModel)]="nuevo.name">
+        <div class="buttons-container">
+          <div class="button-bkg">
+            <i class="fas fa-save" (click)="agregar(nuevo)"></i>
+          </div>
+        </div>
+      </div>
+      <div>
+        <input placeholder="Nivel" [(ngModel)]="nuevo.level">
       </div>
     </div>
   </div>

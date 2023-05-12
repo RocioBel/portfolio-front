@@ -65,4 +65,15 @@ export class PortfolioService {
     return this.http.delete(this.url + 'person/1/language/' + idIdioma);
   }
 
+  actualizarSkill(idSkill:number, datos:any):Observable<any> {
+    return this.http.put(this.url + 'person/1/skill/'+idSkill, datos);
+  }
+
+  agregarSkill(nuevoSkill:any):Observable<any> {
+    return this.http.post(this.url + 'person/1/skill', nuevoSkill);
+  }
+
+  eliminarSkill(idSkill:number):Observable<any> {
+    return this.http.delete(this.url + 'person/1/skill/' + idSkill);
+  }
 }
