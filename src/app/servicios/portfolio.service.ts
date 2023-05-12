@@ -6,10 +6,24 @@ import { HttpClient } from '@angular/common/http'
   providedIn: 'root'
 })
 export class PortfolioService {
-  url:string="https://portfolio-web-6893.onrender.com/";
+  url:string="https://portfolioweb-vargasrocio.b4a.run/";
   constructor(private http:HttpClient) { }
 
   obtenerDatos():Observable<any> {
-    return this.http.get(this.url+'person/1');
+    return this.http.get(this.url + 'person/1');
   }
+
+  actualizarPersona(datos:any):Observable<any> {
+    return this.http.put(this.url + 'person/1', datos);
+  }
+
+  actualizarExperiencia(idExperiencia:number, datos:any):Observable<any> {
+    return this.http.put(this.url + 'person/1/experience/'+idExperiencia, datos);
+  }
+
+  agregarExperiencia(nuevaExperiencia:any):Observable<any> {
+    return this.http.post(this.url + 'person/1/experience', nuevaExperiencia);
+  }
+
+
 }
