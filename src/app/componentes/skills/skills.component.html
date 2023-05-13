@@ -1,57 +1,59 @@
 <div class="card">
-    <div class="title-and-buttons-card">
-      <h2>Skills</h2>
-      <div class="buttons-container">
-        <div class="button-bkg">
-          <i class="fas fa-plus" (click)="activarModoAdicion()"></i>
-        </div>
+  <div class="title-and-buttons-card">
+    <h2>Skills</h2>
+    <div class="buttons-container">
+      <div class="button-bkg">
+        <i class="fas fa-plus" (click)="activarModoAdicion()"></i>
       </div>
     </div>
-    <div *ngFor="let skill of listado; let i = index ">
-      <div *ngIf="seleccionIndex !== i" style="border: 1px;">
-        <div class="title-and-buttons-card">
-          <p>{{skill?.name}}</p>
-          <div class="buttons-container">
-            <div class="button-bkg">
-              <i class="fas fa-pencil-alt" (click)="activarModoEdicion(i)"></i>
-            </div>
-            <div class="button-bkg">
-              <i class="fas fa-trash-alt" (click)="eliminar(skill.skillId)"></i>
-            </div>
-          </div>
-        </div>
-        <div>
-          <p>Nivel: {{skill?.level}}</p>
-        </div>
-      </div>
-
-      <div *ngIf="seleccionIndex === i" style="border: 1px;">
-        <div class="title-and-buttons-card">
-          <input placeholder="Skill" [(ngModel)]="skill.name">
-          <div class="buttons-container">
-            <div class="button-bkg">
-              <i class="fas fa-save" (click)="guardar(skill)"></i>
-            </div>
-          </div>
-        </div>
-        <div>
-          <input placeholder="Nivel" [(ngModel)]="skill.level">
-        </div>
-      </div>
-    </div>
-
-    <div *ngIf="modoAdicion" style="border: 1px;">
+  </div>
+  <div *ngFor="let skill of listado; let i = index ">
+    <div *ngIf="seleccionIndex !== i" style="border: 1px;">
       <div class="title-and-buttons-card">
-        <input placeholder="Skill" [(ngModel)]="nuevo.name">
+        <p>{{skill?.name}}</p>
         <div class="buttons-container">
           <div class="button-bkg">
-            <i class="fas fa-save" (click)="agregar(nuevo)"></i>
+            <i class="fas fa-pencil-alt" (click)="activarModoEdicion(i)"></i>
+          </div>
+          <div class="button-bkg">
+            <i class="fas fa-trash-alt" (click)="eliminar(skill.skillId)"></i>
           </div>
         </div>
       </div>
       <div>
-        <input placeholder="Nivel" [(ngModel)]="nuevo.level">
+        <p>Nivel: {{ obtenerLabel(skill?.level) }}</p>
+        <circle-progress [percent]="skill.level" [radius]="100" [outerStrokeWidth]="16" [innerStrokeWidth]="8"
+          [outerStrokeColor]="'#78C000'" [innerStrokeColor]="'#C7E596'" [animation]="true" [animationDuration]="300">
+        </circle-progress>
       </div>
     </div>
+
+    <div *ngIf="seleccionIndex === i" style="border: 1px;">
+      <div class="title-and-buttons-card">
+        <input placeholder="Skill" [(ngModel)]="skill.name">
+        <div class="buttons-container">
+          <div class="button-bkg">
+            <i class="fas fa-save" (click)="guardar(skill)"></i>
+          </div>
+        </div>
+      </div>
+      <select [(ngModel)]="skill.level">
+        <option *ngFor="let nivel of niveles" [value]="nivel.value">{{ nivel.label }}</option>
+      </select>
+    </div>
   </div>
-  
+
+  <div *ngIf="modoAdicion" style="border: 1px;">
+    <div class="title-and-buttons-card">
+      <input placeholder="Skill" [(ngModel)]="nuevo.name">
+      <div class="buttons-container">
+        <div class="button-bkg">
+          <i class="fas fa-save" (click)="agregar(nuevo)"></i>
+        </div>
+      </div>
+    </div>
+    <select [(ngModel)]="nuevo.level">
+      <option *ngFor="let nivel of niveles" [value]="nivel.value">{{ nivel.label }}</option>
+    </select>
+  </div>
+</div>

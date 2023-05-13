@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
 
-
 @Component({
   selector: 'app-skills',
   templateUrl: './skills.component.html',
@@ -12,6 +11,12 @@ export class SkillsComponent implements OnInit {
   @Input() nuevo:any;
   seleccionIndex: number = -1
   modoAdicion = false;
+
+  niveles = [
+    { label: 'Básico', value: '33.33' },
+    { label: 'Intermedio', value: '66.66' },
+    { label: 'Avanzado', value: '100' },
+  ];
 
   constructor(private portfolioServicio:PortfolioService){
     this.listado = [];
@@ -39,6 +44,26 @@ export class SkillsComponent implements OnInit {
       }
     );
     this.seleccionIndex = -1;
+
+    setTimeout(() => {
+      this.actualizarListado();
+    }, 5000);
+  }
+
+  actualizarListado() {
+    this.portfolioServicio.obtenerSkills().subscribe(
+      (skills: any[]) => {
+        this.listado = skills;
+      },
+      (error: any) => {
+        console.error('Error al obtener el listado:', error);
+      }
+    );
+  }
+
+  obtenerLabel(id: string): string {
+    const nivel = this.niveles.find((nivel) => nivel.value == id);
+    return nivel ? nivel.label : '';
   }
 
   agregar(proyecto:any) {
@@ -53,6 +78,10 @@ export class SkillsComponent implements OnInit {
     );
 
     this.modoAdicion = false;
+
+    setTimeout(() => {
+      this.actualizarListado();
+    }, 3000);
     
   }
 
@@ -67,4 +96,6 @@ export class SkillsComponent implements OnInit {
         console.log("Error al eliminar datos:", error);
       })
   }
+
+ 
 }
