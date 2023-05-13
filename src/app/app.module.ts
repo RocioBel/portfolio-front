@@ -19,6 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PortfolioService } from './servicios/portfolio.service';
 import { InterceptorService } from './servicios/interceptor.service';
 import { NgCircleProgressModule } from 'ng-circle-progress';
+import { HeaderComponent } from './componentes/header/header.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
     SkillsComponent,
     IniciarSesionComponent,
     PortfolioComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
+import { AutenticacionService } from 'src/app/servicios/autenticacion.service';
 
 @Component({
   selector: 'app-skills',
@@ -18,7 +19,7 @@ export class SkillsComponent implements OnInit {
     { label: 'Avanzado', value: '100' },
   ];
 
-  constructor(private portfolioServicio:PortfolioService){
+  constructor(private portfolioServicio:PortfolioService, private autenticacionService: AutenticacionService){
     this.listado = [];
   }
 
@@ -95,6 +96,10 @@ export class SkillsComponent implements OnInit {
       error => {
         console.log("Error al eliminar datos:", error);
       })
+  }
+
+  estaAuntenticado(): boolean {
+    return this.autenticacionService.IsAutenticado
   }
 
  

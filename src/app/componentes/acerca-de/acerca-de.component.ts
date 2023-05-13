@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
+import { AutenticacionService } from 'src/app/servicios/autenticacion.service';
 
 @Component({
   selector: 'app-acerca-de',
@@ -9,7 +10,7 @@ import { PortfolioService } from 'src/app/servicios/portfolio.service';
 export class AcercaDeComponent implements OnInit {
   @Input() data:any;
   modoEdicion = false;
-  constructor(private portfolioServicio: PortfolioService){}
+  constructor(private portfolioServicio: PortfolioService, private autenticacionService: AutenticacionService){}
 
   ngOnInit(): void {  }
 
@@ -28,6 +29,10 @@ export class AcercaDeComponent implements OnInit {
       }
     );
     this.modoEdicion = false;
+  }
+
+  estaAuntenticado(): boolean {
+    return this.autenticacionService.IsAutenticado
   }
 }
 

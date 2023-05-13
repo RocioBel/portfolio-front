@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
+import { AutenticacionService } from 'src/app/servicios/autenticacion.service';
+
 
 @Component({
   selector: 'app-experiencia',
@@ -16,7 +18,7 @@ export class ExperienciasComponent implements OnInit {
     { label: 'Jornada reducida', value: '2' },
     { label: 'Autónomo', value: '3' },
   ];
-  constructor(private portfolioServicio: PortfolioService  ) {
+  constructor(private portfolioServicio: PortfolioService, private autenticacionService: AutenticacionService  ) {
     this.listado = [];
   }
 
@@ -101,5 +103,9 @@ export class ExperienciasComponent implements OnInit {
   reiniciarFecha(experiencia: any): string {
     experiencia.endDate = null;
     return experiencia;
+  }
+
+  estaAuntenticado(): boolean {
+    return this.autenticacionService.IsAutenticado
   }
 }

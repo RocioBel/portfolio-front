@@ -10,7 +10,7 @@
             <div class="title-and-buttons-card">
                 <h1>{{data?.firstName}} {{data?.lastName}}</h1>
                 <div class="button-bkg">
-                    <i class="fas fa-pencil-alt" (click)="activarModoEdicion()"></i>
+                    <i *ngIf="this.estaAuntenticado()" class="fas fa-pencil-alt" (click)="activarModoEdicion()"></i>
                 </div>
             </div>
             <div class="text-card">

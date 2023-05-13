@@ -2,7 +2,7 @@
   <div class="title-and-buttons-card">
     <h2>Acerca de </h2>
     <div class="button-bkg">
-      <i class="fas fa-pencil-alt" (click)="activarModoEdicion()"></i>
+      <i *ngIf="this.estaAuntenticado()" class="fas fa-pencil-alt" (click)="activarModoEdicion()"></i>
     </div>
   </div>
   <div class="text-card">

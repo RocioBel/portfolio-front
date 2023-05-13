@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
+import { AutenticacionService } from 'src/app/servicios/autenticacion.service';
 
 
 @Component({
@@ -13,7 +14,7 @@ export class EducacionComponent implements OnInit{
   seleccionIndex: number = -1
   modoAdicion = false;
 
-  constructor(private portfolioServicio:PortfolioService){
+  constructor(private portfolioServicio:PortfolioService, private autenticacionService: AutenticacionService){
     this.listado = [];
   }
 
@@ -89,6 +90,10 @@ export class EducacionComponent implements OnInit{
   reiniciarFecha(educacion: any): string {
     educacion.endDate = null;
     return educacion;
+  }
+
+  estaAuntenticado(): boolean {
+    return this.autenticacionService.IsAutenticado
   }
   
 }

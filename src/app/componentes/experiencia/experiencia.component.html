@@ -3,7 +3,7 @@
     <h2>Experiencia</h2>
     <div class="buttons-container">
       <div class="button-bkg">
-        <i class="fas fa-plus" (click)="activarModoAdicion()"></i>
+        <i *ngIf="this.estaAuntenticado()" class="fas fa-plus" (click)="activarModoAdicion()"></i>
       </div>
     </div>
   </div>
@@ -13,10 +13,10 @@
         <p>{{experiencia?.jobTitle}}</p>
         <div class="buttons-container">
           <div class="button-bkg">
-            <i class="fas fa-pencil-alt" (click)="activarModoEdicion(i)"></i>
+            <i *ngIf="this.estaAuntenticado()" class="fas fa-pencil-alt" (click)="activarModoEdicion(i)"></i>
           </div>
           <div class="button-bkg">
-            <i class="fas fa-trash-alt" (click)="eliminar(experiencia.experienceId)"></i>
+            <i *ngIf="this.estaAuntenticado()" class="fas fa-trash-alt" (click)="eliminar(experiencia.experienceId)"></i>
           </div>
         </div>
       </div>

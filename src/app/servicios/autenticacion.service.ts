@@ -28,4 +28,13 @@ export class AutenticacionService {
     return this.currentUserSubject.value;
   }
 
+  get IsAutenticado(): boolean {
+    return !!this.currentUserSubject.value;
+  }
+
+  CerrarSesion() {
+    sessionStorage.removeItem('currentUser');
+    this.currentUserSubject.next(null);
+  }
+
 }

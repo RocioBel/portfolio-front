@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
+import { AutenticacionService } from 'src/app/servicios/autenticacion.service';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class IdiomasComponent implements OnInit {
     { label: 'Avanzado', value: '100' },
   ];
 
-  constructor(private portfolioServicio:PortfolioService){
+  constructor(private portfolioServicio:PortfolioService, private autenticacionService: AutenticacionService){
     this.listado = [];
   }
 
@@ -86,7 +87,6 @@ export class IdiomasComponent implements OnInit {
     
   }
 
-
   eliminar(id:number) {
     console.log("componente:" + id);
     this.portfolioServicio.eliminarIdioma(id).subscribe(
@@ -96,5 +96,9 @@ export class IdiomasComponent implements OnInit {
       error => {
         console.log("Error al eliminar datos:", error);
       })
+  }
+
+  estaAuntenticado(): boolean {
+    return this.autenticacionService.IsAutenticado
   }
 }
