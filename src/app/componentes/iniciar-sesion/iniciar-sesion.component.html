@@ -1,32 +1,33 @@
-<h1 class="m-10">Iniciar sesión</h1>
-<form [formGroup]="form" class="m-10" (ngSubmit)="onEnviar($event)">
-  <div class="form-outline mb-4">
-    <input type="text" id="form2Example1" formControlName="username" 
-    [ngClass]="{'is-invalid': Username?.errors && Username?.touched, 'is-valid': !Username?.errors && Username?.touched }"
-    class="form-control"/>
-    <label class="form-label" for="form2Example1">Usuario</label>
-    <div *ngIf="Username?.errors && Username?.touched">
-      <p *ngIf="Username?.hasError('required')" class="text-danger">
-        El username es requerido
-      </p>
+<div>
+  <div class="login-box">
+  <h1 class="m-10" style="">Te damos la bienvenida</h1>
+  <form [formGroup]="form" class="m-10" (ngSubmit)="onEnviar($event)">
+    <div class="form-outline mb-4">
+      <input type="text" id="form2Example1" formControlName="username" placeholder="Usuario"
+      [ngClass]="{'is-invalid': Username?.errors && Username?.touched, 'is-valid': !Username?.errors && Username?.touched }"
+      class="form-control"/>
+      <div *ngIf="Username?.errors && Username?.touched">
+        <p *ngIf="Username?.hasError('required')" class="text-danger">
+          El username es requerido
+        </p>
+      </div>
     </div>
-  </div>
-
-  <div class="form-outline mb-4">
-    <input type="password" id="form2Example2" formControlName="password" 
-    [ngClass]="{'is-invalid': Password?.errors && Password?.touched, 'is-valid': !Password?.errors && Password?.touched }"
-    class="form-control" />
-    <label class="form-label" for="form2Example2">Contraseña</label>
-    <div *ngIf="Password?.errors && Password?.touched">
-      <p *ngIf="Password?.hasError('required')" class="text-danger">
-        La contraseña es requerida
-      </p>
-      <p *ngIf="Password?.hasError('minlength')" class="text-danger">
-        La contraseña debe ser de 8 o más carateres
-      </p>
+  
+    <div class="form-outline mb-4 margin">
+      <input type="password" id="form2Example2" formControlName="password" placeholder="Contraseña"
+      [ngClass]="{'is-invalid': Password?.errors && Password?.touched, 'is-valid': !Password?.errors && Password?.touched }"
+      class="form-control" />
+      <div *ngIf="Password?.errors && Password?.touched">
+        <p *ngIf="Password?.hasError('required')" class="text-danger">
+          La contraseña es requerida
+        </p>
+        <p *ngIf="Password?.hasError('minlength')" class="text-danger">
+          La contraseña debe ser de 8 o más carateres
+        </p>
+      </div>
     </div>
+  
+    <button type="submit" class="btn btn-primary btn-block mb-4">Iniciar sesión</button>
+  
+  </form>
   </div>
-
-  <button type="submit" class="btn btn-primary btn-block mb-4">Enviar</button>
-
-</form>

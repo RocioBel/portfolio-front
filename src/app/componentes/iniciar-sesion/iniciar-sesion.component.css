@@ -1,0 +1,31 @@
+.login-box {
+    padding: 50px;
+    width: 396px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
+    background-color: white;
+    margin-bottom: 12%;
+    margin-left: 35%;
+    margin-top: 9%;
+}
+
+h1 {
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.mb-4 {
+margin-bottom: 1.8rem !important;
+}
+
+button {
+    margin-left: 90px;
+}
+
+.form-label {
+    font-size: smaller;
+}
+
+.text-danger {
+    padding-top: -10px;
+}
