@@ -10,15 +10,27 @@ import { AutenticacionService } from 'src/app/servicios/autenticacion.service';
 export class AcercaDeComponent implements OnInit {
   @Input() data:any;
   modoEdicion = false;
+  datosOriginales: any;
   constructor(private portfolioServicio: PortfolioService, private autenticacionService: AutenticacionService){}
 
-  ngOnInit(): void {  }
+  ngOnInit(): void { 
+    this.datosOriginales = { ...this.data };
+    this.portfolioServicio.obtenerDatos().subscribe(
+      response => {
+        this.datosOriginales = { ...response };
+      },
+      error => {
+        console.log("Error al obtener datos:", error);
+      }
+    );
+  }
 
   activarModoEdicion() {
     this.modoEdicion = true;
   }
 
   desactivarModoEdicion() {
+    this.data = { ...this.datosOriginales };
     this.modoEdicion = false;
   }
 
