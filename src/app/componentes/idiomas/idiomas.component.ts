@@ -13,6 +13,12 @@ export class IdiomasComponent implements OnInit {
   seleccionIndex: number = -1
   modoAdicion = false;
 
+  niveles = [
+    { label: 'Básico', value: '33.33' },
+    { label: 'Intermedio', value: '66.66' },
+    { label: 'Avanzado', value: '100' },
+  ];
+
   constructor(private portfolioServicio:PortfolioService){
     this.listado = [];
   }
@@ -39,6 +45,26 @@ export class IdiomasComponent implements OnInit {
       }
     );
     this.seleccionIndex = -1;
+    
+    setTimeout(() => {
+      this.actualizarListado();
+    }, 5000);
+  }
+
+  actualizarListado() {
+    this.portfolioServicio.obtenerIdiomas().subscribe(
+      (idiomas: any[]) => {
+        this.listado = idiomas;
+      },
+      (error: any) => {
+        console.error('Error al obtener el listado:', error);
+      }
+    );
+  }
+
+  obtenerLabel(id: string): string {
+    const nivel = this.niveles.find((nivel) => nivel.value == id);
+    return nivel ? nivel.label : '';
   }
 
   agregar(proyecto:any) {
@@ -53,6 +79,10 @@ export class IdiomasComponent implements OnInit {
     );
 
     this.modoAdicion = false;
+    
+    setTimeout(() => {
+      this.actualizarListado();
+    }, 3000);
     
   }
 
