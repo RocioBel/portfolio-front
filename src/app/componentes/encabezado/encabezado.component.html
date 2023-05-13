@@ -20,15 +20,33 @@
         </div>
 
         <div *ngIf="modoEdicion" class="card no-border">
-            <div class="title-and-buttons-card">
-                <input [(ngModel)]="data.firstName">
-                <input [(ngModel)]="data.lastName">
-                <div class="button-bkg">
-                    <i class="fas fa-save" (click)="guardarCambios(data)"></i>
+            <div class="edit-container">
+                <div class="inputs-encabezado">
+                    <div class="all">
+                        <input class="form-control" [(ngModel)]="data.firstName">
+                        <small class="form-text text-muted">Nombre/s</small>
+                    </div>
+                    <div class="all">
+                        <input class="form-control" [(ngModel)]="data.lastName">
+                        <small class="form-text text-muted">Apellido/s</small>
+                    </div>
+                </div>
+                <div class="buttons-container">
+                    <div class="button-bkg">
+                        <i class="fas fa-check" (click)="guardarCambios(data)"></i>
+                    </div>
+                    <div class="button-bkg">
+                        <i class="fas fa-ban" (click)="desactivarModoEdicion()"></i>
+                    </div>
                 </div>
             </div>
             <div class="text-card">
-                <input [(ngModel)]="data.title">
+                <div class="inputs-encabezado">
+                    <div class="all">                        
+                        <input class="form-control" [(ngModel)]="data.title">
+                        <small class="form-text text-muted">Título</small>
+                    </div>
+                </div>
                 <p>Buenos Aires, Argentina</p>
             </div>
         </div>
