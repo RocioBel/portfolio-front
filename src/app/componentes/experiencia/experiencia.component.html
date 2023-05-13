@@ -1,28 +1,81 @@
 <div class="card">
-    <div class="title-and-buttons-card">
-      <h2>Experiencia</h2>
-      <div class="buttons-container">
-        <div class="button-bkg">
-          <i class="fas fa-plus"></i>
-        </div>
-      </div>
-    </div>
-    <div *ngFor="let experiencia of experienciaList ">
-      <div style="border: 1px;">
-        <div class="title-and-buttons-card">
-          <p>{{experiencia?.jobTitle}}</p>
-          <div class="buttons-container">
-            <div class="button-bkg">
-              <i class="fas fa-pencil-alt"></i>
-            </div>
-          </div>
-        </div>
-        <div>
-          <p>{{experiencia?.company}}</p>
-          <!-- <p>{{experiencia?.startDate[0]}} - {{experiencia?.endDate[0]}}</p> -->
-          <p>{{experiencia?.description}}</p>
-        </div>
+  <div class="title-and-buttons-card">
+    <h2>Experiencia</h2>
+    <div class="buttons-container">
+      <div class="button-bkg">
+        <i *ngIf="this.estaAuntenticado()" class="fas fa-plus" (click)="activarModoAdicion()"></i>
       </div>
     </div>
   </div>
-  
+  <div *ngFor="let experiencia of listado; let i = index ">
+    <div *ngIf="seleccionIndex !== i" style="border: 1px;">
+      <div class="title-and-buttons-card">
+        <p>{{experiencia?.jobTitle}}</p>
+        <div class="buttons-container">
+          <div class="button-bkg">
+            <i *ngIf="this.estaAuntenticado()" class="fas fa-pencil-alt" (click)="activarModoEdicion(i)"></i>
+          </div>
+          <div class="button-bkg">
+            <i *ngIf="this.estaAuntenticado()" class="fas fa-trash-alt" (click)="eliminar(experiencia.experienceId)"></i>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p>{{experiencia?.company}}</p>
+        <p>{{experiencia?.description}}</p>
+        <p>{{ obtenerLabelTipoTrabajo(experiencia?.typeId) }}</p>
+        <div style="display:flex">{{experiencia?.startDate}} -
+          <div *ngIf="!experiencia.isActual">
+            <p>{{ experiencia.endDate }}</p>
+          </div>
+          <div *ngIf="experiencia.isActual">
+            <p>Actualidad</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="seleccionIndex === i" style="border: 1px;">
+      <div class="title-and-buttons-card">
+        <input placeholder="Puesto" [(ngModel)]="experiencia.jobTitle">
+        <div class="buttons-container">
+          <div class="button-bkg">
+            <i class="fas fa-save" (click)="guardar(experiencia)"></i>
+          </div>
+        </div>
+      </div>
+      <div>
+        <input placeholder="Empresa" [(ngModel)]="experiencia.company">
+        <input placeholder="Descripción" [(ngModel)]="experiencia.description">
+        <select [(ngModel)]="experiencia.typeId">
+          <option *ngFor="let tipo of tiposTrabajo" [value]="tipo.value">{{ tipo.label }}</option>
+        </select>
+        <input type="date" [(ngModel)]="experiencia.startDate">
+        <input type="checkbox" [(ngModel)]="experiencia.isActual" (change)="reiniciarFecha(experiencia)"> <label>Actualmente tengo este cargo</label>
+        <input type="date" [(ngModel)]="experiencia.endDate" [disabled]="experiencia.isActual">
+      </div>
+    </div>
+
+  </div>
+
+  <div *ngIf="modoAdicion" style="border: 1px;">
+    <div class="title-and-buttons-card">
+      <input placeholder="Puesto" [(ngModel)]="nueva.jobTitle">
+      <div class="buttons-container">
+        <div class="button-bkg">
+          <i class="fas fa-save" (click)="agregar(nueva)"></i>
+        </div>
+      </div>
+    </div>
+    <div>
+      <input placeholder="Empresa" [(ngModel)]="nueva.company">
+      <input placeholder="Descripción" [(ngModel)]="nueva.description">
+      <select [(ngModel)]="nueva.typeId">
+        <option *ngFor="let tipo of tiposTrabajo" [value]="tipo.value">{{ tipo.label }}</option>
+      </select>
+      <input type="date" [(ngModel)]="nueva.startDate">
+      <input type="checkbox" [(ngModel)]="nueva.isActual" (change)="reiniciarFecha(nueva)"> <label>Actualmente tengo este cargo</label>
+      <input type="date" [(ngModel)]="nueva.endDate" [disabled]="nueva.isActual">
+    </div>
+  </div>
+</div>

@@ -1,12 +1,23 @@
-<div class="card">
-    <div class="title-and-buttons-card">
-        <h2>Acerca de </h2>
-        <div  class="button-bkg">
-            <i class="fas fa-pencil-alt"></i>
-        </div>
+<div *ngIf="!modoEdicion" class="card">
+  <div class="title-and-buttons-card">
+    <h2>Acerca de </h2>
+    <div class="button-bkg">
+      <i *ngIf="this.estaAuntenticado()" class="fas fa-pencil-alt" (click)="activarModoEdicion()"></i>
     </div>
-    <div class="text-card">
-        <p>{{data}}
-        </p>
+  </div>
+  <div class="text-card">
+    <p>{{data?.aboutMe}}
+    </p>
+  </div>
+</div>
+<div *ngIf="modoEdicion" class="card">
+  <div class="title-and-buttons-card">
+    <h2>Acerca de</h2>
+    <div class="button-bkg">
+      <i class="fas fa-save" (click)="guardarCambios(data)"></i>
     </div>
+  </div>
+  <div class="text-card">
+    <textarea [(ngModel)]="data.aboutMe"></textarea>
+  </div>
 </div>

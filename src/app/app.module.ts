@@ -15,9 +15,11 @@ import { SkillsComponent } from './componentes/skills/skills.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { IniciarSesionComponent } from './componentes/iniciar-sesion/iniciar-sesion.component';
 import { PortfolioComponent } from './componentes/portfolio/portfolio.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PortfolioService } from './servicios/portfolio.service';
 import { InterceptorService } from './servicios/interceptor.service';
+import { NgCircleProgressModule } from 'ng-circle-progress';
+import { HeaderComponent } from './componentes/header/header.component';
 
 @NgModule({
   declarations: [
@@ -31,12 +33,15 @@ import { InterceptorService } from './servicios/interceptor.service';
     SkillsComponent,
     IniciarSesionComponent,
     PortfolioComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FormsModule,
+    NgCircleProgressModule.forRoot({})
   ],
   providers: [PortfolioService,
   {provide: HTTP_INTERCEPTORS, useClass:InterceptorService, multi:true }

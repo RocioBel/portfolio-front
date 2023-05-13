@@ -1,26 +1,59 @@
 <div class="card">
-    <div class="title-and-buttons-card">
-      <h2>Idiomas</h2>
-      <div class="buttons-container">
-        <div class="button-bkg">
-          <i class="fas fa-plus"></i>
-        </div>
-      </div>
-    </div>
-    <div *ngFor="let idioma of idiomaList ">
-      <div style="border: 1px;">
-        <div class="title-and-buttons-card">
-          <p>{{idioma?.name}}</p>
-          <div class="buttons-container">
-            <div class="button-bkg">
-              <i class="fas fa-pencil-alt"></i>
-            </div>
-          </div>
-        </div>
-        <div>
-          <p>Nivel: {{idioma?.level}}</p>
-        </div>
+  <div class="title-and-buttons-card">
+    <h2>Idiomas</h2>
+    <div class="buttons-container">
+      <div class="button-bkg">
+        <i *ngIf="this.estaAuntenticado()" class="fas fa-plus" (click)="activarModoAdicion()"></i>
       </div>
     </div>
   </div>
-  
+  <div *ngFor="let idioma of listado; let i = index ">
+    <div *ngIf="seleccionIndex !== i" style="border: 1px;">
+      <div class="title-and-buttons-card">
+        <p>{{idioma?.name}}</p>
+        <div class="buttons-container">
+          <div class="button-bkg">
+            <i *ngIf="this.estaAuntenticado()" class="fas fa-pencil-alt" (click)="activarModoEdicion(i)"></i>
+          </div>
+          <div class="button-bkg">
+            <i *ngIf="this.estaAuntenticado()" class="fas fa-trash-alt" (click)="eliminar(idioma.languageId)"></i>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p>Nivel: {{ obtenerLabel(idioma?.level) }}</p>
+        <circle-progress [percent]="idioma.level" [radius]="100" [outerStrokeWidth]="16" [innerStrokeWidth]="8"
+          [outerStrokeColor]="'#78C000'" [innerStrokeColor]="'#C7E596'" [animation]="true" [animationDuration]="300">
+        </circle-progress>
+      </div>
+    </div>
+
+    <div *ngIf="seleccionIndex === i" style="border: 1px;">
+      <div class="title-and-buttons-card">
+        <input placeholder="Idioma" [(ngModel)]="idioma.name">
+        <div class="buttons-container">
+          <div class="button-bkg">
+            <i class="fas fa-save" (click)="guardar(idioma)"></i>
+          </div>
+        </div>
+      </div>
+      <select [(ngModel)]="idioma.level">
+        <option *ngFor="let nivel of niveles" [value]="nivel.value">{{ nivel.label }}</option>
+      </select>
+    </div>
+  </div>
+
+  <div *ngIf="modoAdicion" style="border: 1px;">
+    <div class="title-and-buttons-card">
+      <input placeholder="Idioma" [(ngModel)]="nuevo.name">
+      <div class="buttons-container">
+        <div class="button-bkg">
+          <i class="fas fa-save" (click)="agregar(nuevo)"></i>
+        </div>
+      </div>
+    </div>
+    <select [(ngModel)]="nuevo.level">
+      <option *ngFor="let nivel of niveles" [value]="nivel.value">{{ nivel.label }}</option>
+    </select>
+  </div>
+</div>
