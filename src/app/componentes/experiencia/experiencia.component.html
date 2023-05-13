@@ -7,10 +7,10 @@
       </div>
     </div>
   </div>
-  <div *ngFor="let experiencia of listado; let i = index ">
+  <div class="box-border" *ngFor="let experiencia of listado; let i = index ">
     <div *ngIf="seleccionIndex !== i" style="border: 1px;">
       <div class="title-and-buttons-card">
-        <p>{{experiencia?.jobTitle}}</p>
+        <h6>{{experiencia?.jobTitle}}</h6>
         <div class="buttons-container">
           <div class="button-bkg">
             <i *ngIf="this.estaAuntenticado()" class="fas fa-pencil-alt" (click)="activarModoEdicion(i)"></i>
@@ -21,17 +21,20 @@
         </div>
       </div>
       <div>
-        <p>{{experiencia?.company}}</p>
-        <p>{{experiencia?.description}}</p>
-        <p>{{ obtenerLabelTipoTrabajo(experiencia?.typeId) }}</p>
-        <div style="display:flex">{{experiencia?.startDate}} -
-          <div *ngIf="!experiencia.isActual">
-            <p>{{ experiencia.endDate }}</p>
-          </div>
-          <div *ngIf="experiencia.isActual">
-            <p>Actualidad</p>
-          </div>
+        <div style="display: flex; flex-direction: row; margin-bottom: -15px; margin-top: -15px;">
+          <p>{{experiencia?.company}} · </p>
+          <p>{{ obtenerLabelTipoTrabajo(experiencia?.typeId) }}</p>
         </div>
+        <small class="small-grey">{{experiencia?.description}}</small>
+
+        <div class="small-grey" *ngIf="!experiencia.isActual">
+          <small>{{experiencia?.startDate}} · {{ experiencia.endDate }}</small>
+        </div>
+
+        <div class="small-grey" *ngIf="experiencia.isActual">
+          <small>{{experiencia?.startDate}} · Actualidad</small>
+        </div>
+
       </div>
     </div>
 
@@ -58,7 +61,7 @@
 
   </div>
 
-  <div *ngIf="modoAdicion" style="border: 1px;">
+  <div *ngIf="modoAdicion" class="box-border">
     <div class="title-and-buttons-card">
       <input placeholder="Puesto" [(ngModel)]="nueva.jobTitle">
       <div class="buttons-container">

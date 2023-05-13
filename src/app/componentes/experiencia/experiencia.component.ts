@@ -108,4 +108,6 @@ export class ExperienciasComponent implements OnInit {
   estaAuntenticado(): boolean {
     return this.autenticacionService.IsAutenticado
   }
+
+  
 }
