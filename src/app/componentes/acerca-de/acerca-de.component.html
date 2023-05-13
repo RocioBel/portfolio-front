@@ -13,11 +13,21 @@
 <div *ngIf="modoEdicion" class="card">
   <div class="title-and-buttons-card">
     <h2>Acerca de</h2>
-    <div class="button-bkg">
-      <i class="fas fa-save" (click)="guardarCambios(data)"></i>
-    </div>
+    <div class="buttons-container">
+      <div class="button-bkg">
+          <i class="fas fa-check" (click)="guardarCambios(data)"></i>
+      </div>
+      <div class="button-bkg">
+          <i class="fas fa-ban" (click)="desactivarModoEdicion()"></i>
+      </div>
+  </div>
   </div>
   <div class="text-card">
-    <textarea [(ngModel)]="data.aboutMe"></textarea>
+    <div class="inputs-encabezado">
+      <div class="all"> 
+      <textarea class="form-control" [(ngModel)]="data.aboutMe"></textarea>
+      <small class="form-text text-muted">Breve descripción</small>
+    </div>
+    </div>
   </div>
 </div>

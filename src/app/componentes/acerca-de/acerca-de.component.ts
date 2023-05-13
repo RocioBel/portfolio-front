@@ -18,6 +18,10 @@ export class AcercaDeComponent implements OnInit {
     this.modoEdicion = true;
   }
 
+  desactivarModoEdicion() {
+    this.modoEdicion = false;
+  }
+
   guardarCambios(cambios:any) {
     console.log("cambios: "+JSON.stringify(cambios));
     this.portfolioServicio.actualizarPersona(cambios).subscribe(
