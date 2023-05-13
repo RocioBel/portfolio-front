@@ -128,15 +128,61 @@ h2{
 
 .btn-bkg{
     background-color: rgba(0,0,0,0.06);
-    /* visibility: hidden; */
 }
 
-/* .button-edit i:first-child:hover {
-    background-color:rgba(0,0,0,0.08);
-    transition: 0.7s;
+.edit-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.inputs-encabezado {
+  display: flex; 
+  flex-direction: row; 
+  width: 40%;
+  margin-top: 10px;
+}
+
+.all {
+  width: 100%;
+}
+
+.text-muted {
+  margin-left: 12px !important;
+  margin-bottom: 15px;
+}
+
+.box-border {
+    padding: 15px;
+    margin: 0 60px 20px 60px;
+    border: 1px black;
     border-radius: 8px;
-  }
-  
-  .button-edit i:last-child:hover {
-    background-color: blue;
-  } */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
+}
+
+.small-grey {
+    color:#00000099
+}
+
+.exp-title {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: -15px;
+}
+
+.little-box {
+    flex-shrink: 3;
+    width: 30%;
+    padding: 15px;
+    margin: 0 60px 20px 60px;
+    border: 1px black;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
+}
+
+.triple-box {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    flex-wrap: wrap;
+}
