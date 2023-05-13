@@ -6,38 +6,53 @@ import { AutenticacionService } from 'src/app/servicios/autenticacion.service';
 @Component({
   selector: 'app-encabezado',
   templateUrl: './encabezado.component.html',
-  styleUrls: ['./encabezado.component.css']
+  styleUrls: ['./encabezado.component.css'],
 })
-export class EncabezadoComponent implements OnInit{
-  @Input() data:any;
+export class EncabezadoComponent implements OnInit {
+  @Input() data: any;
   modoEdicion = false;
-  constructor(private portfolioServicio: PortfolioService, private autenticacionService: AutenticacionService){}
+  datosOriginales: any;
+  constructor(
+    private portfolioServicio: PortfolioService,
+    private autenticacionService: AutenticacionService
+  ) {}
 
-  ngOnInit(): void {  }
+  ngOnInit(): void {
+    this.datosOriginales = { ...this.data };
+    this.portfolioServicio.obtenerDatos().subscribe(
+      (response) => {
+        this.datosOriginales = { ...response };
+      },
+      (error) => {
+        console.log('Error al obtener datos:', error);
+      }
+    );
+  }
 
   activarModoEdicion() {
     this.modoEdicion = true;
   }
 
   desactivarModoEdicion() {
+    this.data = { ...this.datosOriginales };
     this.modoEdicion = false;
   }
 
-  guardarCambios(cambios:any) {
-    console.log("cambios: "+JSON.stringify(cambios));
+  guardarCambios(cambios: any) {
+    console.log('cambios: ' + JSON.stringify(cambios));
     this.portfolioServicio.actualizarPersona(cambios).subscribe(
-      response => {
+      (response) => {
         console.log('Datos actualizados:', response);
       },
-      error => {
-        console.log("Error al actualizar datos:", error);
+      (error) => {
+        console.log('Error al actualizar datos:', error);
       }
     );
     this.modoEdicion = false;
   }
 
   estaAuntenticado(): boolean {
-    return this.autenticacionService.IsAutenticado
+    return this.autenticacionService.IsAutenticado;
   }
-
+  
 }
