@@ -7,10 +7,43 @@
       </div>
     </div>
   </div>
-  <div *ngFor="let proyecto of listado; let i = index ">
+  <!-- Agregar -->
+  <div *ngIf="modoAdicion" class="box-border">
+    <div class="title-and-buttons-card">
+      <div class="all">
+        <small class="form-text text-muted">Nombre del proyecto</small>
+        <input class="form-control inputs-encabezado" [(ngModel)]="nuevo.name">
+      </div>
+      <div class="buttons-container">
+        <div class="button-bkg">
+          <i class="fas fa-check" (click)="agregar(nuevo)"></i>
+        </div>
+        <div class="button-bkg">
+          <i class="fas fa-ban" (click)="desactivarModoAdicion()"></i>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="all ">
+        <small class="form-text text-muted">Descripción</small>
+        <input class="form-control inputs-encabezado" [(ngModel)]="nuevo.description">
+      </div>
+      <div class="all ">
+        <small class="form-text text-muted">Github</small>
+        <input class="form-control inputs-encabezado" [(ngModel)]="nuevo.github">
+      </div>
+      <div class="all ">
+        <small class="form-text text-muted">Url</small>
+        <input class="form-control inputs-encabezado" [(ngModel)]="nuevo.url">
+      </div>
+    </div>
+  </div>
+
+  <div class="box-border"  *ngFor="let proyecto of listado; let i = index ">
+    <!-- Ver -->
     <div *ngIf="seleccionIndex !== i" style="border: 1px;">
       <div class="title-and-buttons-card">
-        <p>{{proyecto?.name}}</p>
+        <h6>{{proyecto?.name}}</h6>
         <div class="buttons-container">
           <div class="button-bkg">
             <i *ngIf="this.estaAuntenticado()" class="fas fa-pencil-alt" (click)="activarModoEdicion(i)"></i>
@@ -21,43 +54,48 @@
         </div>
       </div>
       <div>
-        <p>{{proyecto?.description}}</p>
-        <p>{{proyecto?.github}}</p>
-        <p>{{proyecto?.url}}</p>
+        <div class="margin-bottom: -15px; margin-top: -15px;">
+          <p>{{proyecto?.description}}</p>
+        </div>
+        <div class="small-grey">
+          <a class="form-text" href={{proyecto?.github}}>{{proyecto?.github}}</a>
+        </div>
+        <div class="small-grey">
+          <a  class="form-text" href={{proyecto?.url}}>{{proyecto?.url}}</a>
+        </div>
       </div>
     </div>
 
+    <!-- Editar -->
     <div *ngIf="seleccionIndex === i" style="border: 1px;">
       <div class="title-and-buttons-card">
-        <input placeholder="Nombre del proyecto" [(ngModel)]="proyecto.name">
+        <div class="all">
+          <small class="form-text text-muted">Nombre del proyecto</small>
+          <input class="form-control inputs-encabezado" [(ngModel)]="proyecto.name">
+        </div>
         <div class="buttons-container">
           <div class="button-bkg">
-            <i class="fas fa-save" (click)="guardar(proyecto)"></i>
+            <i class="fas fa-check" (click)="agregar(proyecto)"></i>
+          </div>
+          <div class="button-bkg">
+            <i class="fas fa-ban" (click)="desactivarModoEdicion()"></i>
           </div>
         </div>
       </div>
       <div>
-        <input placeholder="Descripción" [(ngModel)]="proyecto.description">
-        <input placeholder="Github" [(ngModel)]="proyecto.github">
-        <input placeholder="Url" [(ngModel)]="proyecto.url">
-      </div>
-    </div>
-
-  </div>
-
-  <div *ngIf="modoAdicion" style="border: 1px;">
-    <div class="title-and-buttons-card">
-      <input placeholder="Nombre del proyecto" [(ngModel)]="nuevo.name">
-      <div class="buttons-container">
-        <div class="button-bkg">
-          <i class="fas fa-save" (click)="agregar(nuevo)"></i>
+        <div class="all ">
+          <small class="form-text text-muted">Descripción</small>
+          <input class="form-control inputs-encabezado" [(ngModel)]="proyecto.description">
+        </div>
+        <div class="all ">
+          <small class="form-text text-muted">Github</small>
+          <input class="form-control inputs-encabezado" [(ngModel)]="proyecto.github">
+        </div>
+        <div class="all ">
+          <small class="form-text text-muted">Url</small>
+          <input class="form-control inputs-encabezado" [(ngModel)]="proyecto.url">
         </div>
       </div>
-    </div>
-    <div>
-      <input placeholder="Descripción" [(ngModel)]="nuevo.description">
-      <input placeholder="Github" [(ngModel)]="nuevo.github">
-      <input placeholder="Url" [(ngModel)]="nuevo.url">
     </div>
   </div>
 </div>
