@@ -13,20 +13,41 @@ export class EducacionComponent implements OnInit{
   @Input() nueva:any;
   seleccionIndex: number = -1
   modoAdicion = false;
+  datosOriginales: any = [];
 
   constructor(private portfolioServicio:PortfolioService, private autenticacionService: AutenticacionService){
     this.listado = [];
   }
 
-  ngOnInit(): void {  }
+  ngOnInit(): void { 
+    this.datosOriginales = [];
+    this.portfolioServicio.obtenerEducacion().subscribe(
+      (response) => {
+        this.datosOriginales = response;
+        console.log(this.datosOriginales);
+      },
+      (error) => {
+        console.log('Error al obtener datos:', error);
+      }
+    );
+   }
 
   activarModoEdicion(index:any) {
     this.seleccionIndex = index;
   }
 
+  desactivarModoEdicion() {
+    this.seleccionIndex = -1;
+    this.listado = this.datosOriginales ;
+  }
+
   activarModoAdicion() {
     this.modoAdicion = true;
     this.nueva = {}; 
+  }
+
+  desactivarModoAdicion() {
+    this.modoAdicion = false;
   }
 
   guardar(cambios:any) {
