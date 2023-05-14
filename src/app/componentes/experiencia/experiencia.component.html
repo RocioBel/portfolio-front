@@ -7,6 +7,61 @@
       </div>
     </div>
   </div>
+  <!-- Agregar -->
+  <div *ngIf="modoAdicion" class="box-border">
+    <div class="title-and-buttons-card">
+      <div class="all">
+        <small class="form-text text-muted">Puesto</small>
+        <input class="form-control inputs-encabezado" [(ngModel)]="nueva.jobTitle">
+      </div>
+      <div class="buttons-container">
+        <div class="button-bkg">
+          <i class="fas fa-check" (click)="agregar(nueva)"></i>
+        </div>
+        <div class="button-bkg">
+          <i class="fas fa-ban" (click)="desactivarModoAdicion()"></i>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div>
+        <div class="title-and-buttons-card">
+          <div class="all ">
+            <small class="form-text text-muted">Empresa</small>
+            <input class="form-control inputs-encabezado" [(ngModel)]="nueva.company">
+          </div>
+          <div class="all">
+            <small class="form-text text-muted">Tipo de trabajo</small>
+            <select class="form-control inputs-encabezado" [(ngModel)]="nueva.typeId">
+              <option *ngFor="let tipo of tiposTrabajo" [value]="tipo.value">{{ tipo.label }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="all ">
+        <small class="form-text text-muted">Descripción</small>
+        <input class="form-control inputs-encabezado" [(ngModel)]="nueva.description">
+      </div>
+      <div class="title-and-buttons-card">
+        <div class="all">
+          <small class="form-text text-muted">Fecha de comienzo</small>
+          <input class="form-control inputs-encabezado" type="date" [(ngModel)]="nueva.startDate">
+        </div>
+        <div class="all ">
+          <small class="form-text text-muted">Fecha de fin</small>
+          <input class="form-control inputs-encabezado" type="date" [(ngModel)]="nueva.endDate"
+            [disabled]="nueva.isActual">
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" [(ngModel)]="nueva.isActual" (change)="reiniciarFecha(nueva)">
+          <label class="form-text text-muted">
+            Actualmente tengo este cargo
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Ver -->
   <div class="box-border" *ngFor="let experiencia of listado; let i = index ">
     <div *ngIf="seleccionIndex !== i" style="border: 1px;">
       <div class="title-and-buttons-card">
@@ -16,7 +71,8 @@
             <i *ngIf="this.estaAuntenticado()" class="fas fa-pencil-alt" (click)="activarModoEdicion(i)"></i>
           </div>
           <div class="button-bkg">
-            <i *ngIf="this.estaAuntenticado()" class="fas fa-trash-alt" (click)="eliminar(experiencia.experienceId)"></i>
+            <i *ngIf="this.estaAuntenticado()" class="fas fa-trash-alt"
+              (click)="eliminar(experiencia.experienceId)"></i>
           </div>
         </div>
       </div>
@@ -38,47 +94,60 @@
       </div>
     </div>
 
+    <!-- Editar -->
     <div *ngIf="seleccionIndex === i" style="border: 1px;">
       <div class="title-and-buttons-card">
-        <input placeholder="Puesto" [(ngModel)]="experiencia.jobTitle">
+        <div class="all">
+          <small class="form-text text-muted">Puesto</small>
+          <input class="form-control inputs-encabezado" [(ngModel)]="experiencia.jobTitle">
+        </div>
         <div class="buttons-container">
           <div class="button-bkg">
-            <i class="fas fa-save" (click)="guardar(experiencia)"></i>
+            <i class="fas fa-check" (click)="agregar(experiencia)"></i>
+          </div>
+          <div class="button-bkg">
+            <i class="fas fa-ban" (click)="desactivarModoEdicion()"></i>
           </div>
         </div>
       </div>
       <div>
-        <input placeholder="Empresa" [(ngModel)]="experiencia.company">
-        <input placeholder="Descripción" [(ngModel)]="experiencia.description">
-        <select [(ngModel)]="experiencia.typeId">
-          <option *ngFor="let tipo of tiposTrabajo" [value]="tipo.value">{{ tipo.label }}</option>
-        </select>
-        <input type="date" [(ngModel)]="experiencia.startDate">
-        <input type="checkbox" [(ngModel)]="experiencia.isActual" (change)="reiniciarFecha(experiencia)"> <label>Actualmente tengo este cargo</label>
-        <input type="date" [(ngModel)]="experiencia.endDate" [disabled]="experiencia.isActual">
-      </div>
-    </div>
-
-  </div>
-
-  <div *ngIf="modoAdicion" class="box-border">
-    <div class="title-and-buttons-card">
-      <input placeholder="Puesto" [(ngModel)]="nueva.jobTitle">
-      <div class="buttons-container">
-        <div class="button-bkg">
-          <i class="fas fa-save" (click)="agregar(nueva)"></i>
+        <div>
+          <div class="title-and-buttons-card">
+            <div class="all ">
+              <small class="form-text text-muted">Empresa</small>
+              <input class="form-control inputs-encabezado" [(ngModel)]="experiencia.company">
+            </div>
+            <div class="all">
+              <small class="form-text text-muted">Tipo de trabajo</small>
+              <select class="form-control inputs-encabezado" [(ngModel)]="experiencia.typeId">
+                <option *ngFor="let tipo of tiposTrabajo" [value]="tipo.value">{{ tipo.label }}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="all ">
+          <small class="form-text text-muted">Descripción</small>
+          <input class="form-control inputs-encabezado" [(ngModel)]="experiencia.description">
+        </div>
+        <div class="title-and-buttons-card">
+          <div class="all">
+            <small class="form-text text-muted">Fecha de comienzo</small>
+            <input class="form-control inputs-encabezado" type="date" [(ngModel)]="experiencia.startDate">
+          </div>
+          <div class="all ">
+            <small class="form-text text-muted">Fecha de fin</small>
+            <input class="form-control inputs-encabezado" type="date" [(ngModel)]="experiencia.endDate"
+              [disabled]="experiencia.isActual">
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" [(ngModel)]="experiencia.isActual"
+              (change)="reiniciarFecha(experiencia)">
+            <label class="form-text text-muted">
+              Actualmente tengo este cargo
+            </label>
+          </div>
         </div>
       </div>
-    </div>
-    <div>
-      <input placeholder="Empresa" [(ngModel)]="nueva.company">
-      <input placeholder="Descripción" [(ngModel)]="nueva.description">
-      <select [(ngModel)]="nueva.typeId">
-        <option *ngFor="let tipo of tiposTrabajo" [value]="tipo.value">{{ tipo.label }}</option>
-      </select>
-      <input type="date" [(ngModel)]="nueva.startDate">
-      <input type="checkbox" [(ngModel)]="nueva.isActual" (change)="reiniciarFecha(nueva)"> <label>Actualmente tengo este cargo</label>
-      <input type="date" [(ngModel)]="nueva.endDate" [disabled]="nueva.isActual">
     </div>
   </div>
 </div>
