@@ -13,6 +13,8 @@ export class ExperienciasComponent implements OnInit {
   @Input() nueva: any;
   seleccionIndex: number = -1;
   modoAdicion = false;
+  datosOriginales: any = [];
+
   tiposTrabajo = [
     { label: 'Jornada completa', value: '1' },
     { label: 'Jornada reducida', value: '2' },
@@ -22,15 +24,35 @@ export class ExperienciasComponent implements OnInit {
     this.listado = [];
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.datosOriginales = [];
+    this.portfolioServicio.obtenerExperiencias().subscribe(
+      (response) => {
+        this.datosOriginales = response;
+        console.log(this.datosOriginales);
+      },
+      (error) => {
+        console.log('Error al obtener datos:', error);
+      }
+    );
+  }
 
   activarModoEdicion(index: any) {
     this.seleccionIndex = index;
   }
 
+  desactivarModoEdicion() {
+    this.seleccionIndex = -1;
+    this.listado = this.datosOriginales ;
+  }
+
   activarModoAdicion() {
     this.modoAdicion = true;
     this.nueva = {};
+  }
+
+  desactivarModoAdicion() {
+    this.modoAdicion = false;
   }
 
   guardar(cambios: any) {
@@ -108,4 +130,6 @@ export class ExperienciasComponent implements OnInit {
   estaAuntenticado(): boolean {
     return this.autenticacionService.IsAutenticado
   }
+
+  
 }
