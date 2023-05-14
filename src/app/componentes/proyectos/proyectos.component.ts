@@ -13,20 +13,41 @@ export class ProyectosComponent implements OnInit {
   @Input() nuevo:any;
   seleccionIndex: number = -1
   modoAdicion = false;
+  datosOriginales: any = [];
 
   constructor(private portfolioServicio:PortfolioService, private autenticacionService: AutenticacionService){
     this.listado = [];
   }
 
-  ngOnInit(): void {  }
+  ngOnInit(): void { 
+    this.datosOriginales = [];
+    this.portfolioServicio.obtenerProyectos().subscribe(
+      (response) => {
+        this.datosOriginales = response;
+        console.log(this.datosOriginales);
+      },
+      (error) => {
+        console.log('Error al obtener datos:', error);
+      }
+    );
+   }
 
   activarModoEdicion(index:any) {
     this.seleccionIndex = index;
   }
 
+  desactivarModoEdicion() {
+    this.seleccionIndex = -1;
+    this.listado = this.datosOriginales ;
+  }
+
   activarModoAdicion() {
     this.modoAdicion = true;
     this.nuevo = {}; 
+  }
+
+  desactivarModoAdicion() {
+    this.modoAdicion = false;
   }
 
   guardar(cambios:any) {
@@ -40,6 +61,21 @@ export class ProyectosComponent implements OnInit {
       }
     );
     this.seleccionIndex = -1;
+
+    setTimeout(() => {
+      this.actualizarListado();
+    }, 5000);
+  }
+
+  actualizarListado() {
+    this.portfolioServicio.obtenerProyectos().subscribe(
+      (proyectos: any[]) => {
+        this.listado = proyectos;
+      },
+      (error: any) => {
+        console.error('Error al obtener el listado:', error);
+      }
+    );
   }
 
   agregar(proyecto:any) {
@@ -54,6 +90,10 @@ export class ProyectosComponent implements OnInit {
     );
 
     this.modoAdicion = false;
+
+    setTimeout(() => {
+      this.actualizarListado();
+    }, 3000);
     
   }
 
