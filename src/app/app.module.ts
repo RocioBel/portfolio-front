@@ -20,6 +20,7 @@ import { PortfolioService } from './servicios/portfolio.service';
 import { InterceptorService } from './servicios/interceptor.service';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { HeaderComponent } from './componentes/header/header.component';
+import { FooterComponent } from './componentes/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { HeaderComponent } from './componentes/header/header.component';
     IniciarSesionComponent,
     PortfolioComponent,
     HeaderComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
