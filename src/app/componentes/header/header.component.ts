@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AutenticacionService } from 'src/app/servicios/autenticacion.service';
-import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { PortfolioService } from 'src/app/servicios/portfolio.service';
 export class HeaderComponent {
   data:any;
   constructor(private autenticacionService: AutenticacionService, 
-    private router:RouterModule, private portfolioServicio:PortfolioService) {}
+    private router:Router, private portfolioServicio:PortfolioService) {}
 
   ngOnInit(): void {
     this.portfolioServicio.obtenerDatos().subscribe(
@@ -30,5 +30,9 @@ export class HeaderComponent {
 
   estaAuntenticado(): boolean {
     return this.autenticacionService.IsAutenticado
+  }
+
+  cargarInicio(){
+    this.router.navigate(['/']);
   }
 }

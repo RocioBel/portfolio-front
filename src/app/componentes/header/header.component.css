@@ -15,6 +15,7 @@ header {
 
 .logo img {
   height: 100px;
+  cursor: pointer;
 }
 
 .social-icons a {
