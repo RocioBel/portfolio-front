@@ -12,7 +12,7 @@
     <div *ngIf="modoAdicion" class="card-inline" style="border: 1px;">
       <div class="all">
         <small class="form-text text-muted">Idioma</small>
-        <input class="form-control inputs-encabezado" [(ngModel)]="nuevo.name"> 
+        <input class="form-control inputs-encabezado" [(ngModel)]="nuevo.name">
       </div>
       <div class="all">
         <small class="form-text text-muted">Nivel</small>
@@ -29,20 +29,18 @@
         </div>
       </div>
     </div>
-    <div class="card-inline" *ngFor="let idioma of listado; let i = index "> 
+    <div class="card-inline" *ngFor="let idioma of listado; let i = index ">
       <!-- Ver -->
       <div *ngIf="seleccionIndex !== i" style="border: 1px;">
-        <div class="title-and-buttons-card">
-          <h6>{{idioma?.name}}</h6>
-          <div class="buttons-container">
-            <div class="button-bkg">
-              <i *ngIf="this.estaAuntenticado()" class="fas fa-pencil-alt" (click)="activarModoEdicion(i)"></i>
-            </div>
-            <div class="button-bkg">
-              <i *ngIf="this.estaAuntenticado()" class="fas fa-trash-alt" (click)="eliminar(idioma.languageId)"></i>
-            </div>
+        <div class="buttons-container">
+          <div class="button-bkg">
+            <i *ngIf="this.estaAuntenticado()" class="fas fa-pencil-alt" (click)="activarModoEdicion(i)"></i>
+          </div>
+          <div class="button-bkg">
+            <i *ngIf="this.estaAuntenticado()" class="fas fa-trash-alt" (click)="eliminar(idioma.languageId)"></i>
           </div>
         </div>
+        <h6>{{idioma?.name}}</h6>
         <div>
           <p>Nivel: {{ obtenerLabel(idioma?.level) }}</p>
           <circle-progress [percent]="idioma.level" [radius]="50" [outerStrokeWidth]="12" [innerStrokeWidth]="6"
@@ -52,12 +50,10 @@
       </div>
       <!-- Editar -->
       <div *ngIf="seleccionIndex === i" style="border: 1px;">
-        <div class="title-and-buttons-card">
           <div class="all">
             <small class="form-text text-muted">Idioma</small>
-            <input class="form-control inputs-encabezado" [(ngModel)]="idioma.name"> 
+            <input class="form-control inputs-encabezado" [(ngModel)]="idioma.name">
           </div>
-        </div>
         <div class="all">
           <small class="form-text text-muted">Nivel</small>
           <select class="form-control inputs-encabezado" [(ngModel)]="idioma.level">
