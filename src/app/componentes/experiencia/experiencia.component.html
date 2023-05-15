@@ -64,34 +64,42 @@
   <!-- Ver -->
   <div class="box-border" *ngFor="let experiencia of listado; let i = index ">
     <div *ngIf="seleccionIndex !== i" style="border: 1px;">
-      <div class="title-and-buttons-card">
-        <h6>{{experiencia?.jobTitle}}</h6>
-        <div class="buttons-container">
-          <div class="button-bkg">
-            <i *ngIf="this.estaAuntenticado()" class="fas fa-pencil-alt" (click)="activarModoEdicion(i)"></i>
+      <div class="container-inline">
+        <img class="logo" [src]="experiencia?.logo">
+        <div style="align-items: center; flex-grow: 1;">
+          <div class="title-and-buttons-card">
+            <h6>{{experiencia?.jobTitle}}</h6>
           </div>
-          <div class="button-bkg">
-            <i *ngIf="this.estaAuntenticado()" class="fas fa-trash-alt"
-              (click)="eliminar(experiencia.experienceId)"></i>
+          <div>
+            <div style="display: flex; flex-direction: row; margin-bottom: -15px; margin-top: -15px;">
+              <p>{{experiencia?.company}} · </p>
+              <p>{{ obtenerLabelTipoTrabajo(experiencia?.typeId) }}</p>
+            </div>
+            <small class="small-grey">{{experiencia?.description}}</small>
+
+            <div class="small-grey" *ngIf="!experiencia.isActual">
+              <small>{{experiencia?.startDate}} · {{ experiencia.endDate }}</small>
+            </div>
+
+            <div class="small-grey" *ngIf="experiencia.isActual">
+              <small>{{experiencia?.startDate}} · Actualidad</small>
+            </div>
+
+          </div>
+        </div>
+        <div>
+          <div class="buttons-container">
+            <div class="button-bkg">
+              <i *ngIf="this.estaAuntenticado()" class="fas fa-pencil-alt" (click)="activarModoEdicion(i)"></i>
+            </div>
+            <div class="button-bkg">
+              <i *ngIf="this.estaAuntenticado()" class="fas fa-trash-alt"
+                (click)="eliminar(experiencia.experienceId)"></i>
+            </div>
           </div>
         </div>
       </div>
-      <div>
-        <div style="display: flex; flex-direction: row; margin-bottom: -15px; margin-top: -15px;">
-          <p>{{experiencia?.company}} · </p>
-          <p>{{ obtenerLabelTipoTrabajo(experiencia?.typeId) }}</p>
-        </div>
-        <small class="small-grey">{{experiencia?.description}}</small>
 
-        <div class="small-grey" *ngIf="!experiencia.isActual">
-          <small>{{experiencia?.startDate}} · {{ experiencia.endDate }}</small>
-        </div>
-
-        <div class="small-grey" *ngIf="experiencia.isActual">
-          <small>{{experiencia?.startDate}} · Actualidad</small>
-        </div>
-
-      </div>
     </div>
 
     <!-- Editar -->

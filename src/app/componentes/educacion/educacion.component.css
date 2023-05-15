@@ -1,0 +1,13 @@
+.container-inline {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.logo {
+    height: 70px;
+    width: 70px;
+    padding: 5px;
+    margin:10px;
+}
