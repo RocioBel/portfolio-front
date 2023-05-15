@@ -52,8 +52,25 @@
   <div class="box-border" *ngFor="let educacion of listado; let i = index">
     <!-- Ver -->
     <div *ngIf="seleccionIndex !== i" style="border: 1px;">
-      <div class="title-and-buttons-card">
-        <h6>{{educacion?.titleName}}</h6>
+      <div class="container-inline">
+        <img class="logo" [src]="educacion?.logo">
+        <div style="align-items: center; flex-grow: 1;">
+          <div class="title-and-buttons-card">
+            <h6>{{educacion?.titleName}}</h6>
+          </div>
+          <div>
+            <div style="display: flex; flex-direction: row; margin-bottom: -15px; margin-top: -15px;">
+              <p>{{educacion?.institute}}</p>
+            </div>
+            <div class="small-grey" *ngIf="!educacion.isActual">
+              <small>{{educacion?.startDate}} · {{ educacion.endDate }}</small>
+            </div>
+          </div>
+          <div class="small-grey" *ngIf="educacion.isActual">
+            <small>{{educacion?.startDate}} · Actualidad</small>
+          </div>
+
+        </div>
         <div class="buttons-container">
           <div class="button-bkg">
             <i *ngIf="this.estaAuntenticado()" class="fas fa-pencil-alt" (click)="activarModoEdicion(i)"></i>
@@ -62,19 +79,6 @@
             <i *ngIf="this.estaAuntenticado()" class="fas fa-trash-alt" (click)="eliminar(educacion.educationId)"></i>
           </div>
         </div>
-      </div>
-      <div>
-        <div class="margin-bottom: -15px; margin-top: -15px;">
-          <p>{{educacion?.institute}}</p>
-        </div>
-        <div class="small-grey" *ngIf="!educacion.isActual">
-          <small>{{educacion?.startDate}} · {{ educacion.endDate }}</small>
-        </div>
-
-        <div class="small-grey" *ngIf="educacion.isActual">
-          <small>{{educacion?.startDate}} · Actualidad</small>
-        </div>
-
       </div>
     </div>
     <!-- Editar -->
@@ -109,7 +113,8 @@
               [disabled]="educacion.isActual">
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" [(ngModel)]="educacion.isActual" (change)="reiniciarFecha(educacion)">
+            <input class="form-check-input" type="checkbox" [(ngModel)]="educacion.isActual"
+              (change)="reiniciarFecha(educacion)">
             <label class="form-text text-muted">
               Actualmente estoy cursando
             </label>
