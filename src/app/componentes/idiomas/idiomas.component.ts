@@ -13,6 +13,7 @@ export class IdiomasComponent implements OnInit {
   @Input() nuevo:any;
   seleccionIndex: number = -1
   modoAdicion = false;
+  datosOriginales: any = [];
 
   niveles = [
     { label: 'Básico', value: '33.33' },
@@ -24,15 +25,35 @@ export class IdiomasComponent implements OnInit {
     this.listado = [];
   }
 
-  ngOnInit(): void {  }
+  ngOnInit(): void { 
+    this.datosOriginales = [];
+    this.portfolioServicio.obtenerIdiomas().subscribe(
+      (response) => {
+        this.datosOriginales = response;
+        console.log(this.datosOriginales);
+      },
+      (error) => {
+        console.log('Error al obtener datos:', error);
+      }
+    );
+   }
 
   activarModoEdicion(index:any) {
     this.seleccionIndex = index;
   }
 
+  desactivarModoEdicion() {
+    this.seleccionIndex = -1;
+    this.listado = this.datosOriginales ;
+  }
+
   activarModoAdicion() {
     this.modoAdicion = true;
     this.nuevo = {}; 
+  }
+
+  desactivarModoAdicion() {
+    this.modoAdicion = false;
   }
 
   guardar(cambios:any) {
