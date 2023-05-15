@@ -7,53 +7,73 @@
       </div>
     </div>
   </div>
-  <div *ngFor="let idioma of listado; let i = index ">
-    <div *ngIf="seleccionIndex !== i" style="border: 1px;">
-      <div class="title-and-buttons-card">
-        <p>{{idioma?.name}}</p>
-        <div class="buttons-container">
-          <div class="button-bkg">
-            <i *ngIf="this.estaAuntenticado()" class="fas fa-pencil-alt" (click)="activarModoEdicion(i)"></i>
-          </div>
-          <div class="button-bkg">
-            <i *ngIf="this.estaAuntenticado()" class="fas fa-trash-alt" (click)="eliminar(idioma.languageId)"></i>
-          </div>
-        </div>
+  <div class="container-inline">
+    <!-- Agregar -->
+    <div *ngIf="modoAdicion" class="card-inline" style="border: 1px;">
+      <div class="all">
+        <small class="form-text text-muted">Idioma</small>
+        <input class="form-control inputs-encabezado" [(ngModel)]="nuevo.name"> 
       </div>
-      <div>
-        <p>Nivel: {{ obtenerLabel(idioma?.level) }}</p>
-        <circle-progress [percent]="idioma.level" [radius]="100" [outerStrokeWidth]="16" [innerStrokeWidth]="8"
-          [outerStrokeColor]="'#78C000'" [innerStrokeColor]="'#C7E596'" [animation]="true" [animationDuration]="300">
-        </circle-progress>
+      <div class="all">
+        <small class="form-text text-muted">Nivel</small>
+        <select class="form-control inputs-encabezado" [(ngModel)]="nuevo.level">
+          <option *ngFor="let nivel of niveles" [value]="nivel.value">{{ nivel.label }}</option>
+        </select>
       </div>
-    </div>
-
-    <div *ngIf="seleccionIndex === i" style="border: 1px;">
-      <div class="title-and-buttons-card">
-        <input placeholder="Idioma" [(ngModel)]="idioma.name">
-        <div class="buttons-container">
-          <div class="button-bkg">
-            <i class="fas fa-save" (click)="guardar(idioma)"></i>
-          </div>
-        </div>
-      </div>
-      <select [(ngModel)]="idioma.level">
-        <option *ngFor="let nivel of niveles" [value]="nivel.value">{{ nivel.label }}</option>
-      </select>
-    </div>
-  </div>
-
-  <div *ngIf="modoAdicion" style="border: 1px;">
-    <div class="title-and-buttons-card">
-      <input placeholder="Idioma" [(ngModel)]="nuevo.name">
       <div class="buttons-container">
         <div class="button-bkg">
-          <i class="fas fa-save" (click)="agregar(nuevo)"></i>
+          <i class="fas fa-check" (click)="agregar(nuevo)"></i>
+        </div>
+        <div class="button-bkg">
+          <i class="fas fa-ban" (click)="desactivarModoAdicion()"></i>
         </div>
       </div>
     </div>
-    <select [(ngModel)]="nuevo.level">
-      <option *ngFor="let nivel of niveles" [value]="nivel.value">{{ nivel.label }}</option>
-    </select>
+    <div class="card-inline" *ngFor="let idioma of listado; let i = index "> 
+      <!-- Ver -->
+      <div *ngIf="seleccionIndex !== i" style="border: 1px;">
+        <div class="title-and-buttons-card">
+          <h6>{{idioma?.name}}</h6>
+          <div class="buttons-container">
+            <div class="button-bkg">
+              <i *ngIf="this.estaAuntenticado()" class="fas fa-pencil-alt" (click)="activarModoEdicion(i)"></i>
+            </div>
+            <div class="button-bkg">
+              <i *ngIf="this.estaAuntenticado()" class="fas fa-trash-alt" (click)="eliminar(idioma.languageId)"></i>
+            </div>
+          </div>
+        </div>
+        <div>
+          <p>Nivel: {{ obtenerLabel(idioma?.level) }}</p>
+          <circle-progress [percent]="idioma.level" [radius]="50" [outerStrokeWidth]="12" [innerStrokeWidth]="6"
+            [outerStrokeColor]="'#78C000'" [innerStrokeColor]="'#C7E596'" [animation]="true" [animationDuration]="300">
+          </circle-progress>
+        </div>
+      </div>
+      <!-- Editar -->
+      <div *ngIf="seleccionIndex === i" style="border: 1px;">
+        <div class="title-and-buttons-card">
+          <div class="all">
+            <small class="form-text text-muted">Idioma</small>
+            <input class="form-control inputs-encabezado" [(ngModel)]="idioma.name"> 
+          </div>
+        </div>
+        <div class="all">
+          <small class="form-text text-muted">Nivel</small>
+          <select class="form-control inputs-encabezado" [(ngModel)]="idioma.level">
+            <option *ngFor="let nivel of niveles" [value]="nivel.value">{{ nivel.label }}</option>
+          </select>
+        </div>
+        <div class="buttons-container">
+          <div class="button-bkg">
+            <i class="fas fa-check" (click)="guardar(idioma)"></i>
+          </div>
+          <div class="button-bkg">
+            <i class="fas fa-ban" (click)="desactivarModoEdicion()"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
