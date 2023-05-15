@@ -1,17 +1,6 @@
-<!-- <div class="header-container">
-  <div class="buttons-container">
-    <div class="button-bkg">
-      <i *ngIf="this.estaAuntenticado()" class="fas fa-power-off" (click)="cerrarSesion()"></i>
-    </div>
-    <div class="button-bkg">
-      <i *ngIf="!this.estaAuntenticado()"  [routerLink]="'/iniciar-sesion'" class="fas fa-user" ></i>
-    </div>
-  </div>
-</div> -->
-
 <header>
-  <div class="logo">
-    <img src="assets/ArgProg.png" alt="Logo de ArgProg">
+  <div class="logo" >
+      <img src="assets/ArgProg.png" alt="Logo de ArgProg" (click)="cargarInicio()">
   </div>
   <div class="social-icons">
     <a [href]="data?.github" target="_blank">
