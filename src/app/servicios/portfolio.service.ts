@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http'
   providedIn: 'root'
 })
 export class PortfolioService {
-  url:string="https://portfolioweb-vargasrocio.b4a.run/";
+  url:string="https://portfolio-00jz.onrender.com/";
   constructor(private http:HttpClient) { }
 
   obtenerDatos():Observable<any> {
